@@ -1,8 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    val maxSdkVers by extra(31)
+    val minSdkVers by extra(21)
+    val codeVers by extra(1)
+    val nameVers by extra("1.0")
+
+    val coroutinesVers by extra("1.5.2")
+    val lifecycleVers by extra("2.4.0")
+    val fragmentVers by extra("1.3.6")
+    val navigationVers by extra("2.3.5")
+    val hiltVers by extra("2.40.1")
+    val roomVers by extra("2.3.0")
+
     dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.40.1")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVers")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVers")
     }
 }
 
@@ -18,7 +30,6 @@ tasks.register("clean",Delete::class){
 }
 
 apply(from = "$rootDir/ktlint.gradle.kts")
-apply(from = "$rootDir/config.gradle.kts")
 
 // detekt
 val analysisDir = file(projectDir)

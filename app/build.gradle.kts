@@ -11,7 +11,7 @@ android {
     compileSdk = rootProject.extra["maxSdkVers"] as Int
 
     defaultConfig {
-        applicationId = "ru.ksart.transportmycity"
+        applicationId = "ru.ksart.timefocus"
         minSdk = rootProject.extra["minSdkVers"] as Int
         targetSdk = rootProject.extra["maxSdkVers"] as Int
         versionCode = rootProject.extra["codeVers"] as Int
@@ -88,6 +88,8 @@ dependencies {
     implementation("io.coil-kt:coil:1.4.0")
     // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+    // PreferenceFragmentCompat
+    implementation("androidx.preference:preference-ktx:1.1.1")
     // DateTime
     implementation("com.jakewharton.threetenabp:threetenabp:1.3.1")
     // To use only without reflection variants of viewBinding

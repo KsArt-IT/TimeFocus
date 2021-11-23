@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_title_first">TimeTracker + Pomodoro</string>
+    <string name="onboarding_text_first">Time tracker with pomodoro technology connection and event notification.</string>
+
+    <string name="onboarding_title_second">Adding Activities</string>
+    <string name="onboarding_text_second">First add all the required activities</string>
+
+    <string name="onboarding_title_third"></string>
+    <string name="onboarding_title_fourth"></string>
+    <string name="onboarding_title_fifth"></string>
+    <string name="onboarding_title_sixth"></string>
+    <string name="onboarding_title_seventh"></string>
+    <string name="onboarding_title_eighth"></string>
+    <string name="onboarding_title_ninth"></string>
+
+</resources>
