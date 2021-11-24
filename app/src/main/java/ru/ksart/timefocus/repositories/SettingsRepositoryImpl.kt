@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import ru.ksart.timefocus.R
+import ru.ksart.timefocus.model.db.ActionsDatabase
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -18,6 +20,9 @@ class SettingsRepositoryImpl @Inject constructor(
     private val defaultPreferences by lazy {
         context.getSharedPreferences(context.packageName + "_preferences", Context.MODE_PRIVATE)
     }
+
+    @Inject
+    lateinit var db: ActionsDatabase
 
     private val res = context.resources
 
@@ -36,5 +41,6 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override suspend fun initData() {
         //TODO init data
+        db.actionNamesDao().getActionNames()
     }
 }

@@ -38,9 +38,10 @@ class OnboardingViewModel @Inject constructor(
                 if (first) {
                     val list = repository.requestScreens()
                     _uiState.value = UiState.Success(list)
-                    settings.initData()
                     // инициализация базы
-                    delay(10000)
+                    delay(250)
+                    settings.initData()
+//                    delay(10000)
                     UiState.Loading(isLoading = false)
                 } else UiState.Next()
             } catch (e: Exception) {
