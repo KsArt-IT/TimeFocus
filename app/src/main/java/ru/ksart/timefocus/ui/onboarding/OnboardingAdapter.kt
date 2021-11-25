@@ -9,9 +9,7 @@ class OnboardingAdapter(
     parent: Fragment,
 ) : FragmentStateAdapter(parent) {
 
-    override fun getItemCount(): Int {
-        return screens.size
-    }
+    override fun getItemCount(): Int = screens.size
 
     override fun createFragment(position: Int): Fragment {
         val screen = screens[position]
