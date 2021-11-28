@@ -1,11 +1,6 @@
 package ru.ksart.timefocus.ui.onboarding
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,57 +9,60 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import ru.ksart.timefocus.R
 import ru.ksart.timefocus.databinding.FragmentOnboardingBinding
 import ru.ksart.timefocus.model.data.DepthTransformation
 import ru.ksart.timefocus.model.data.OnboardingScreen
-import ru.ksart.timefocus.model.data.UiState
+import ru.ksart.timefocus.model.data.UiEvent
 import ru.ksart.timefocus.ui.extension.exhaustive
 import ru.ksart.timefocus.ui.extension.toast
+import ru.ksart.timefocus.ui.main.BaseFragment
+import ru.ksart.timefocus.ui.onboarding.adapter.OnboardingAdapter
 import timber.log.Timber
 
 @AndroidEntryPoint
-class OnboardingFragment : Fragment() {
-
-    private var _binding: FragmentOnboardingBinding? = null
-    private val binding get() = checkNotNull(_binding)
+class OnboardingFragment :
+    BaseFragment<FragmentOnboardingBinding>(FragmentOnboardingBinding::inflate) {
 
     private val viewModel: OnboardingViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = FragmentOnboardingBinding.inflate(inflater, container, false)
-        .also { _binding = it }.root
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initObserve() {
         Timber.tag("tag153").d("OnboardingFragment start")
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { state ->
-                    Timber.tag("tag153").d("state: ${state.javaClass.simpleName}")
-                    when (state) {
-                        is UiState.Loading -> binding.skipOnboarding.isVisible = !state.isLoading
-                        is UiState.Next -> showMainFragment()
-                        is UiState.Success -> state.data.let(::showOnboarding)
-                        is UiState.Error -> {
-                            state.message?.let { toast(it) }
-                            showMainFragment()
-                        }
-                    }.exhaustive
+                launch {
+                    viewModel.uiEvent.collect { event ->
+                        Timber.tag("tag153").d("state: ${event.javaClass.simpleName}")
+                        when (event) {
+                            is UiEvent.Success -> {}
+                            is UiEvent.Loading -> showSkipButton(event.isLoading.not())
+                            is UiEvent.Toast -> toast(event.stringId)
+                            is UiEvent.Error -> {
+                                toast(event.message)
+                                showMainFragment()
+                            }
+                            is UiEvent.Next -> showMainFragment()
+                        }.exhaustive
+                    }
+                }
+                launch {
+                    viewModel.uiState.collectLatest { state ->
+                        state.data?.let(::showOnboarding)
+                        state.isLoading?.let { showSkipButton(it.not()) }
+                    }
                 }
             }
         }
+    }
+
+    override fun initListener() {
         binding.skipOnboarding.setOnClickListener { showMainFragment() }
     }
 
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
+    private fun showSkipButton(show: Boolean) {
+        binding.skipOnboarding.isVisible = show
     }
 
     private fun showOnboarding(list: List<OnboardingScreen>) {

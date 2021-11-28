@@ -9,7 +9,7 @@ buildscript {
     val lifecycleVers by extra("2.4.0")
     val fragmentVers by extra("1.3.6")
     val navigationVers by extra("2.3.5")
-    val hiltVers by extra("2.40.1")
+    val hiltVers by extra("2.40.2")
     val roomVers by extra("2.3.0")
 
     dependencies {

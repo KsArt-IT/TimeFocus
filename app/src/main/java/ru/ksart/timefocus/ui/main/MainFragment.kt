@@ -1,38 +1,41 @@
 package ru.ksart.timefocus.ui.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.activity.addCallback
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import ru.ksart.timefocus.R
 import ru.ksart.timefocus.databinding.FragmentMainBinding
+import ru.ksart.timefocus.ui.extension.toast
+import ru.ksart.timefocus.ui.main.adapter.MainAdapter
 import timber.log.Timber
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
-    private var _binding: FragmentMainBinding? = null
-    private val binding get() = checkNotNull(_binding)
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = FragmentMainBinding.inflate(inflater, container, false).also { _binding = it }.root
+    private var backPressedHold = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.tag("tag153").d("MainFragment Start")
         initBottomNavigation()
         initViewPager()
+        initBack()
     }
 
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
+    private fun initBack() {
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
+            if (backPressedHold + 3000 > System.currentTimeMillis()) {
+                // выход из приложения
+                activity?.finish()
+                exitProcess(0)
+            } else {
+                toast(R.string.press_back_exit)
+                backPressedHold = System.currentTimeMillis()
+            }
+        }
     }
 
     private fun showPage(page: Int) {

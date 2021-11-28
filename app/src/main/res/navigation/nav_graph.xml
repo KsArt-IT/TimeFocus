@@ -18,5 +18,28 @@
         android:id="@+id/mainFragment"
         android:name="ru.ksart.timefocus.ui.main.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_actionsEditFragment"
+            app:destination="@id/actionsEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/actionsEditFragment"
+        android:name="ru.ksart.timefocus.ui.action_edit.ActionsEditFragment"
+        android:label="ActionsAddFragment"
+        tools:layout="@layout/fragment_actions_edit">
+        <action
+            android:id="@+id/action_actionsEditFragment_to_iconsChoiceFragment"
+            app:destination="@id/iconsChoiceFragment" />
+        <argument
+            android:name="actionEdit"
+            app:argType="ru.ksart.timefocus.model.db.models.ActionNames"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/iconsChoiceFragment"
+        android:name="ru.ksart.timefocus.ui.icons_choice.IconsChoiceFragment"
+        android:label="IconsChoiceFragment"
+        tools:layout="@layout/item_icons_choice"/>
 </navigation>

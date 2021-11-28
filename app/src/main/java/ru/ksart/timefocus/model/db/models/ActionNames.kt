@@ -1,11 +1,14 @@
 package ru.ksart.timefocus.model.db.models
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(
     tableName = ActionNamesContract.TABLE_NAME,
     indices = [
@@ -46,10 +49,10 @@ data class ActionNames(
     @ColumnInfo(name = ActionNamesContract.Columns.POMODORO_LONG)
     val pomodoroLong: Boolean = false,
     @ColumnInfo(name = ActionNamesContract.Columns.POMODORO_SWITCH_ID)
-    val pomodoroSwitchId: Long?,
+    val pomodoroSwitchId: Long? = null,
 
     @ColumnInfo(name = ActionNamesContract.Columns.COLOR)
-    val color: String,
+    val color: Int = -0x1000000,//0xFF000000 Black
     @ColumnInfo(name = ActionNamesContract.Columns.ICON)
     val icon: String,
 
@@ -57,4 +60,4 @@ data class ActionNames(
     val number: Int = 0,
     @ColumnInfo(name = ActionNamesContract.Columns.ARCHIVE)
     val archive: Boolean = false,
-)
+): Parcelable

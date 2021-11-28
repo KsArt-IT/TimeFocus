@@ -1,12 +1,25 @@
 <resources>
     <string name="app_name">TimeFocus</string>
     <string name="empty" />
+    <string name="action_add_no_name">No name or icon specified</string>
+
 
     <string name="skip_button_text">Skip</string>
 
     <string name="action_status_active">Active</string>
     <string name="action_status_pause">Paused</string>
     <string name="action_status_stop">Stopped</string>
+    <string name="action_name_hint">Action name</string>
+    <string name="action_group_text">Group</string>
+    <string name="action_suspend_text">Suspend others</string>
+    <string name="action_suspend_all_text">Suspend all others</string>
+    <string name="action_pomodoro_text">Pomodoro time management</string>
+    <string name="action_pomodoro_long_text">Pomodoro a longer time</string>
+    <string name="action_icon_color_text">Сolor icons</string>
+    <string name="action_icon_text">Icons</string>
+    <string name="action_add_button_description">Add action</string>
+    <string name="icon_choice_title">Select an icon</string>
+    <string name="press_back_exit">Press back again to exit!</string>
 
 
 </resources>

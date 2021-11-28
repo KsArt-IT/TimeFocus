@@ -1,13 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="@dimen/indent_small">
+
+    <ImageButton
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/ic_close_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/createButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/ic_check_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/actionNameLayout"
+        style="@style/Theme.TimeFocus.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/indent_small"
+        android:hint="@string/action_name_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cancelButton">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/actionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"
+            android:nextFocusForward="@id/group"
+            android:textAppearance="?attr/textAppearanceCaption" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_group_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionNameLayout" />
+
+    <CheckBox
+        android:id="@+id/suspend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_suspend_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/group" />
+
+    <CheckBox
+        android:id="@+id/suspendAll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indent_large"
+        android:enabled="false"
+        android:text="@string/action_suspend_all_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/suspend" />
+
+    <CheckBox
+        android:id="@+id/pomodoro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_pomodoro_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/suspendAll" />
+
+    <CheckBox
+        android:id="@+id/pomodoroLong"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indent_large"
+        android:enabled="false"
+        android:text="@string/action_pomodoro_long_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pomodoro" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/iconColorTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Actions Edit"
-        />
+        android:text="@string/action_icon_color_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pomodoroLong" />
+
+    <TextView
+        android:id="@+id/iconFileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indent_larger"
+        android:text="@string/action_icon_text"
+        app:layout_constraintStart_toEndOf="@id/iconColorTitle"
+        app:layout_constraintTop_toTopOf="@id/iconColorTitle" />
+
+    <ImageView
+        android:id="@+id/iconColor"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/ic_icon_color_24"
+        app:layout_constraintEnd_toEndOf="@id/iconColorTitle"
+        app:layout_constraintStart_toStartOf="@id/iconColorTitle"
+        app:layout_constraintTop_toBottomOf="@id/iconColorTitle"
+        app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/iconFile"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/ic_check_24"
+        app:layout_constraintEnd_toEndOf="@id/iconFileTitle"
+        app:layout_constraintStart_toStartOf="@id/iconFileTitle"
+        app:layout_constraintTop_toTopOf="@id/iconColor"
+        app:layout_constraintBottom_toBottomOf="@+id/iconColor"
+        app:tint="@color/black" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

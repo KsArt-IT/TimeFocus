@@ -44,13 +44,13 @@ android {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
     implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
 
     // Fragment
     val fragmentVers: String by rootProject.extra
-    implementation("androidx.fragment:fragment-ktx:$fragmentVers")
+    implementation("androidx.fragment:fragment-ktx:${rootProject.extra["fragmentVers"]}")
     implementation("androidx.activity:activity-ktx:1.4.0")
     // Lifecycle KTX
     val lifecycleVers: String by rootProject.extra
@@ -69,7 +69,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVers")
     // Dagger Hilt
     val hiltVers: String by rootProject.extra
-    implementation("com.google.dagger:hilt-android:$hiltVers")
+    implementation("com.google.dagger:hilt-android:${rootProject.extra["hiltVers"]}")
     kapt("com.google.dagger:hilt-compiler:$hiltVers")
     // RoomDao
     val roomVers: String by rootProject.extra
@@ -79,13 +79,15 @@ dependencies {
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     // Delegate Adapter for RecyclerView
-    implementation("com.hannesdorfmann:adapterdelegates4:4.3.0")
+    implementation("com.hannesdorfmann:adapterdelegates4:4.3.1")
     // Viewpager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     // библиотека для отображения индикатора для viewpager2
     implementation("com.tbuonomo:dotsindicator:4.2")
     // Coil
-    implementation("io.coil-kt:coil:1.4.0")
+    val coilVers = "1.4.0"
+    implementation("io.coil-kt:coil:$coilVers")
+    implementation("io.coil-kt:coil-svg:$coilVers")
     // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     // PreferenceFragmentCompat
@@ -93,7 +95,7 @@ dependencies {
     // DateTime
     implementation("com.jakewharton.threetenabp:threetenabp:1.3.1")
     // To use only without reflection variants of viewBinding
-    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.2")
+    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.3")
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 
