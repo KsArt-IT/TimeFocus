@@ -8,7 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import ru.ksart.timefocus.R
 import ru.ksart.timefocus.databinding.FragmentOnboardingScreenBinding
-import ru.ksart.timefocus.model.data.OnboardingScreen
+import ru.ksart.timefocus.domain.entities.OnboardingScreen
 import timber.log.Timber
 
 class OnboardingScreenFragment : Fragment() {

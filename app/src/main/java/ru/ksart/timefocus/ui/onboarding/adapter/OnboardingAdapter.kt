@@ -2,7 +2,7 @@ package ru.ksart.timefocus.ui.onboarding.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import ru.ksart.timefocus.model.data.OnboardingScreen
+import ru.ksart.timefocus.domain.entities.OnboardingScreen
 import ru.ksart.timefocus.ui.onboarding.OnboardingScreenFragment
 
 class OnboardingAdapter(

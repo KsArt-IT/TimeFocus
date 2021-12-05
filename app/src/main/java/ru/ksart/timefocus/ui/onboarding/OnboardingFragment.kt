@@ -13,9 +13,10 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import ru.ksart.timefocus.R
 import ru.ksart.timefocus.databinding.FragmentOnboardingBinding
-import ru.ksart.timefocus.model.data.DepthTransformation
-import ru.ksart.timefocus.model.data.OnboardingScreen
-import ru.ksart.timefocus.model.data.UiEvent
+import ru.ksart.timefocus.data.entities.DepthTransformation
+import ru.ksart.timefocus.domain.entities.OnboardingScreen
+import ru.ksart.timefocus.data.entities.UiEvent
+import ru.ksart.timefocus.data.entities.UiState
 import ru.ksart.timefocus.ui.extension.exhaustive
 import ru.ksart.timefocus.ui.extension.toast
 import ru.ksart.timefocus.ui.main.BaseFragment
@@ -37,7 +38,6 @@ class OnboardingFragment :
                         Timber.tag("tag153").d("state: ${event.javaClass.simpleName}")
                         when (event) {
                             is UiEvent.Success -> {}
-                            is UiEvent.Loading -> showSkipButton(event.isLoading.not())
                             is UiEvent.Toast -> toast(event.stringId)
                             is UiEvent.Error -> {
                                 toast(event.message)
@@ -49,8 +49,18 @@ class OnboardingFragment :
                 }
                 launch {
                     viewModel.uiState.collectLatest { state ->
-                        state.data?.let(::showOnboarding)
-                        state.isLoading?.let { showSkipButton(it.not()) }
+                        when (state) {
+                            is UiState.Success -> showOnboarding(state.data)
+                            is UiState.Loading -> {}
+                        }.exhaustive
+                    }
+                }
+                launch {
+                    viewModel.uiStateSkip.collectLatest { state ->
+                        when (state) {
+                            is UiState.Success -> showSkipButton(true)
+                            is UiState.Loading -> showSkipButton(false)
+                        }.exhaustive
                     }
                 }
             }

@@ -18,9 +18,7 @@ abstract class BaseFragment<T : ViewBinding>(private val inflate: Inflate<T>) : 
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflate.invoke(inflater, container, false).also { _binding = it }.root
-    }
+    ): View = inflate.invoke(inflater, container, false).also { _binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

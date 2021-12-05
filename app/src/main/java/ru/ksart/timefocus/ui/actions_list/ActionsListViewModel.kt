@@ -4,40 +4,48 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
-import ru.ksart.timefocus.model.data.UiEvent
-import ru.ksart.timefocus.model.data.UiState
-import ru.ksart.timefocus.model.db.models.ActionNames
-import ru.ksart.timefocus.repositories.ActionsAddRepository
-import timber.log.Timber
+import kotlinx.coroutines.flow.stateIn
+import ru.ksart.timefocus.data.db.models.ActionNames
+import ru.ksart.timefocus.data.entities.UiEvent
+import ru.ksart.timefocus.data.entities.UiState
+import ru.ksart.timefocus.domain.entities.Results
+import ru.ksart.timefocus.domain.usecase.actions_list.GetActionsListUseCase
+import ru.ksart.timefocus.ui.extension.exhaustive
 import javax.inject.Inject
 
 @HiltViewModel
 class ActionsListViewModel @Inject constructor(
-    private val repository: ActionsAddRepository
+    private val getActionsList: GetActionsListUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<ActionNames>>>(UiState())
-    val uiState = _uiState.asStateFlow()
+    val uiState: StateFlow<UiState<List<ActionNames>>>
 
     private val _uiEvent = Channel<UiEvent<Unit>>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
-        loadList()
-    }
-
-    private fun loadList() {
-        viewModelScope.launch {
-            repository.actionNames.collectLatest {
-                Timber.tag("tag153").d("ActionsListViewModel list=${it.size}")
-                _uiState.value = UiState(data = it)
+        uiState = getActionsList.observe()
+            .mapNotNull { result ->
+                when (result) {
+                    is Results.Success -> {
+//                        Timber.tag("tag153").d("ActionsListViewModel list=${result.data.size}")
+                        UiState.Success(result.data)
+                    }
+                    is Results.Error -> {
+                        _uiEvent.send(UiEvent.Error(result.message))
+                        null
+                    }
+                }.exhaustive
             }
-        }
+            .stateIn(
+                scope = viewModelScope,
+                started = WhileSubscribed(stopTimeoutMillis = 5000),
+                initialValue = UiState.Loading
+            )
     }
 
 }

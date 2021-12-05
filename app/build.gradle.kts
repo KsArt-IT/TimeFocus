@@ -50,7 +50,7 @@ dependencies {
 
     // Fragment
     val fragmentVers: String by rootProject.extra
-    implementation("androidx.fragment:fragment-ktx:${rootProject.extra["fragmentVers"]}")
+    implementation("androidx.fragment:fragment-ktx:$fragmentVers")
     implementation("androidx.activity:activity-ktx:1.4.0")
     // Lifecycle KTX
     val lifecycleVers: String by rootProject.extra

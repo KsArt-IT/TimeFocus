@@ -10,21 +10,23 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.ksart.timefocus.R
-import ru.ksart.timefocus.model.data.UiEvent
-import ru.ksart.timefocus.model.data.UiState
-import ru.ksart.timefocus.model.db.models.ActionNames
-import ru.ksart.timefocus.repositories.ActionsAddRepository
+import ru.ksart.timefocus.domain.usecase.actions_edit.CreateActionNamesUseCase
+import ru.ksart.timefocus.domain.usecase.actions_edit.UpdateActionNamesUseCase
+import ru.ksart.timefocus.data.entities.UiEvent
+import ru.ksart.timefocus.data.entities.UiState
+import ru.ksart.timefocus.data.db.models.ActionNames
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ActionsEditViewModel @Inject constructor(
-    private val repository: ActionsAddRepository
+    private val createActionNames: CreateActionNamesUseCase,
+    private val updateActionNames: UpdateActionNamesUseCase,
 ) : ViewModel() {
 
     private var actionNames = ActionNames(name = "", icon = "")
 
-    private val _uiState = MutableStateFlow<UiState<ActionNames>>(UiState(data = actionNames))
+    private val _uiState = MutableStateFlow<UiState<ActionNames>>(UiState.Success(actionNames))
     val uiState = _uiState.asStateFlow()
 
     private val _uiEvent = Channel<UiEvent<Int>>()
@@ -49,7 +51,7 @@ class ActionsEditViewModel @Inject constructor(
         } else {
             action
         }
-        _uiState.value = UiState(data = actionNames)
+        _uiState.value = UiState.Success(actionNames)
         Timber.tag("tag153").d("ActionsEditViewModel: setActionName id=${actionNames.id}")
     }
 
@@ -58,28 +60,28 @@ class ActionsEditViewModel @Inject constructor(
             try {
                 Timber.tag("tag153").d("ActionsEditViewModel: addActionNames id=${actionNames.id}")
                 if (actionNames.name.isNotBlank() && actionNames.icon.isNotBlank()) {
-                    if (actionNames.id == 0L) repository.add(actionNames)
-                    else repository.update(actionNames)
+                    if (actionNames.id == 0L) createActionNames(actionNames)
+                    else updateActionNames(actionNames)
                     _uiEvent.send(UiEvent.Next())
                 } else {
                     _uiEvent.send(UiEvent.Toast(R.string.action_add_no_name))
                 }
             } catch (e: Exception) {
-                _uiEvent.send(UiEvent.Error(e.localizedMessage))
-            } finally {
-                _uiEvent.send(UiEvent.Loading())
+                _uiEvent.send(UiEvent.Error(e.localizedMessage ?: "An unexpected error occurred"))
             }
         }
     }
+/*
 
     fun setColorIcon(color: Int) {
         actionNames = actionNames.copy(color = color)
         sendUiEvent(UiEvent.Success(color))
     }
+*/
 
     fun setIconFile(file: String) {
         actionNames = actionNames.copy(icon = file)
-        _uiState.value = UiState(data = actionNames)
+        _uiState.value = UiState.Success(actionNames)
     }
 
     fun changeColorIcon() {
@@ -98,7 +100,7 @@ class ActionsEditViewModel @Inject constructor(
         }
         actionNames = actionNames.copy(color = color)
         sendUiEvent(UiEvent.Success(color))
-        _uiState.value = UiState(data = actionNames)
+        _uiState.value = UiState.Success(actionNames)
     }
 
     private fun sendUiEvent(state: UiEvent<Int>) {

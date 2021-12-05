@@ -2,7 +2,7 @@ package ru.ksart.timefocus.ui.actions_list.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import ru.ksart.timefocus.model.db.models.ActionNames
+import ru.ksart.timefocus.data.db.models.ActionNames
 
 class ActionsListAdapter(
     private val onClick: (ActionNames) -> Unit

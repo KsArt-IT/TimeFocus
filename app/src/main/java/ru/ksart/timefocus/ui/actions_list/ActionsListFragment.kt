@@ -10,10 +10,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import ru.ksart.timefocus.R
 import ru.ksart.timefocus.databinding.FragmentActionsListBinding
-import ru.ksart.timefocus.model.data.UiEvent
-import ru.ksart.timefocus.model.db.models.ActionNames
+import ru.ksart.timefocus.data.entities.UiEvent
+import ru.ksart.timefocus.data.entities.UiState
+import ru.ksart.timefocus.data.db.models.ActionNames
 import ru.ksart.timefocus.ui.actions_list.adapter.ActionsListAdapter
 import ru.ksart.timefocus.ui.extension.exhaustive
 import ru.ksart.timefocus.ui.extension.toast
@@ -46,18 +46,19 @@ class ActionsListFragment :
                 launch {
                     viewModel.uiEvent.collect { event ->
                         when (event) {
-                            is UiEvent.Success -> {}
-                            is UiEvent.Loading -> {}
                             is UiEvent.Error -> toast(event.message)
                             is UiEvent.Toast -> toast(event.stringId)
+                            is UiEvent.Success -> {}
                             is UiEvent.Next -> {}
                         }.exhaustive
                     }
                 }
                 launch {
                     viewModel.uiState.collectLatest { state ->
-                        state.data?.let(listAdapter::submitList)
-                        state.isLoading?.let { }
+                        when (state) {
+                            is UiState.Success -> listAdapter.submitList(state.data)
+                            is UiState.Loading -> {}
+                        }.exhaustive
                     }
                 }
             }
@@ -66,12 +67,14 @@ class ActionsListFragment :
 
     override fun initListener() {
         binding.addButton.setOnClickListener {
-            // переход к фрагменту
-            findNavController().navigate(R.id.action_mainFragment_to_actionsEditFragment)
+            // переход к фрагменту редактирования, но для создания
+            showItem()
+//            findNavController().navigate(R.id.action_mainFragment_to_actionsEditFragment)
         }
     }
 
-    private fun showItem(item: ActionNames) {
+    private fun showItem(item: ActionNames? = null) {
+        // переход к фрагменту редактирования
         val action = MainFragmentDirections.actionMainFragmentToActionsEditFragment(item)
         findNavController().navigate(action)
     }

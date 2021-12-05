@@ -1,0 +1,14 @@
+package ru.ksart.timefocus.domain.usecase.actions
+
+import ru.ksart.timefocus.data.db.models.ActionWithInfo
+import ru.ksart.timefocus.domain.repositories.ActionsRepository
+import javax.inject.Inject
+
+class UpdateActionStatusUseCase @Inject constructor(
+    private val repository: ActionsRepository
+) {
+
+    suspend operator fun invoke(params: ActionWithInfo) {
+        repository.changeActionStatus(params)
+    }
+}

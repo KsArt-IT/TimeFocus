@@ -8,20 +8,19 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import ru.ksart.timefocus.model.data.IconChoice
-import ru.ksart.timefocus.model.data.UiEvent
-import ru.ksart.timefocus.model.data.UiState
-import ru.ksart.timefocus.repositories.IconsRepository
-import ru.ksart.timefocus.repositories.OnboardingRepository
+import ru.ksart.timefocus.domain.usecase.icons.GetIconsUseCase
+import ru.ksart.timefocus.domain.entities.IconChoice
+import ru.ksart.timefocus.data.entities.UiEvent
+import ru.ksart.timefocus.data.entities.UiState
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class IconsChoiceViewModel @Inject constructor(
-    private val repository: IconsRepository
+    private val getIcons: GetIconsUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<IconChoice>>>(UiState(isLoading = true))
+    private val _uiState = MutableStateFlow<UiState<List<IconChoice>>>(UiState.Loading)
     val uiState = _uiState.asStateFlow()
 
     private val _uiEvent = Channel<UiEvent<Unit>>()
@@ -32,13 +31,9 @@ class IconsChoiceViewModel @Inject constructor(
             Timber.tag("tag153").d("IconsChoiceViewModel: requestScreens")
             // передаем состояние
             try {
-                val list = repository.requestIcons()
-                _uiState.value = UiState(data = list)
+                _uiState.value = UiState.Success(getIcons())
             } catch (e: Exception) {
-                _uiEvent.send(UiEvent.Error(message = e.localizedMessage))
-            } finally {
-                _uiEvent.send(UiEvent.Loading(isLoading = false))
-                Timber.tag("tag153").d("IconsChoiceViewModel: ok")
+                _uiEvent.send(UiEvent.Error(e.localizedMessage ?: "An unexpected error occurred"))
             }
         }
     }

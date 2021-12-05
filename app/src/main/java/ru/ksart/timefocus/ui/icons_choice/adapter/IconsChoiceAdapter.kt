@@ -2,8 +2,7 @@ package ru.ksart.timefocus.ui.icons_choice.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import ru.ksart.timefocus.model.data.IconChoice
-import timber.log.Timber
+import ru.ksart.timefocus.domain.entities.IconChoice
 
 class IconsChoiceAdapter(
     private val onClick: (IconChoice) -> Unit,

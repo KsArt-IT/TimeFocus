@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/actionsFragment"
         android:icon="@drawable/ic_actions_24"
@@ -11,6 +12,7 @@
     <item
         android:id="@+id/taskCheckFragment"
         android:icon="@drawable/ic_check_task_24"
+        app:showAsAction="always"
         android:title="@string/empty" />
     <item
         android:id="@+id/actionAddFragment"

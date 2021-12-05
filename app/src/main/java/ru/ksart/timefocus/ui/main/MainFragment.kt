@@ -41,7 +41,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private fun showPage(page: Int) {
         Timber.tag("tag153").d("MainFragment: showPage $page")
         if (binding.viewPager.currentItem != page) {
-            // TODO: параметр для проверки с пролистыванием или без
+            // TODO: параметр для проверки с пролистыванием или без, сразу на нужный фрегмент
             binding.viewPager.currentItem = page
 //            binding.viewPager.setCurrentItem(page, false)
         }

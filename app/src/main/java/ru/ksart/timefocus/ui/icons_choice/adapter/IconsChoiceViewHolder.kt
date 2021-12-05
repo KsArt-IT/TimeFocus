@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.ksart.timefocus.databinding.ItemIconsChoiceBinding
-import ru.ksart.timefocus.model.data.IconChoice
+import ru.ksart.timefocus.domain.entities.IconChoice
 import ru.ksart.timefocus.ui.extension.loadSvgFromAsset
 
 class IconsChoiceViewHolder(

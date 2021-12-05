@@ -14,8 +14,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.ksart.timefocus.R
 import ru.ksart.timefocus.databinding.FragmentActionsEditBinding
-import ru.ksart.timefocus.model.data.UiEvent
-import ru.ksart.timefocus.model.db.models.ActionNames
+import ru.ksart.timefocus.data.entities.UiEvent
+import ru.ksart.timefocus.data.entities.UiState
+import ru.ksart.timefocus.data.db.models.ActionNames
 import ru.ksart.timefocus.ui.extension.exhaustive
 import ru.ksart.timefocus.ui.extension.loadSvgFromAsset
 import ru.ksart.timefocus.ui.extension.toast
@@ -65,7 +66,6 @@ class ActionsEditFragment :
                     viewModel.uiEvent.collect { state ->
                         when (state) {
                             is UiEvent.Success -> setColorIcon(state.data)
-                            is UiEvent.Loading -> enableView(state.isLoading)
                             is UiEvent.Toast -> toast(state.stringId)
                             is UiEvent.Error -> toast(state.message)
                             is UiEvent.Next -> back()
@@ -74,9 +74,14 @@ class ActionsEditFragment :
                 }
                 launch {
                     viewModel.uiState.collect { state ->
-                        Timber.tag("tag153").d("ActionsEditFragment: uiState=${state.data?.id}")
-                        state.data?.let(::updateUi)
-                        state.isLoading?.let { enableView(it.not()) }
+                        Timber.tag("tag153").d("ActionsEditFragment: uiState")
+                        when(state) {
+                            is UiState.Success -> {
+                                updateUi(state.data)
+                                enableView(true)
+                            }
+                            is UiState.Loading -> enableView(false)
+                        }.exhaustive
                     }
                 }
             }
@@ -115,6 +120,7 @@ class ActionsEditFragment :
                 pomodoroLong.isChecked = action.pomodoroLong
             }
         } catch (e: Exception) {
+            toast(R.string.unexpected_error)
             back()
         }
     }

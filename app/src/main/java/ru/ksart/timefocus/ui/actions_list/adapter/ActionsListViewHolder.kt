@@ -1,15 +1,12 @@
 package ru.ksart.timefocus.ui.actions_list.adapter
 
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import ru.ksart.timefocus.databinding.ItemActionsListBinding
-import ru.ksart.timefocus.model.db.models.ActionNames
+import ru.ksart.timefocus.data.db.models.ActionNames
 import ru.ksart.timefocus.ui.extension.loadSvgFromAsset
-import java.io.File
 
 class ActionsListViewHolder(
     private val binding: ItemActionsListBinding,

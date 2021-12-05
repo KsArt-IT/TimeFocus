@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_mainFragment_to_actionsEditFragment"
             app:destination="@id/actionsEditFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_historyGroupFragment"
+            app:destination="@id/historyGroupFragment" />
     </fragment>
     <fragment
         android:id="@+id/actionsEditFragment"
@@ -33,7 +36,7 @@
             app:destination="@id/iconsChoiceFragment" />
         <argument
             android:name="actionEdit"
-            app:argType="ru.ksart.timefocus.model.db.models.ActionNames"
+            app:argType="ru.ksart.timefocus.data.db.models.ActionNames"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
@@ -42,4 +45,14 @@
         android:name="ru.ksart.timefocus.ui.icons_choice.IconsChoiceFragment"
         android:label="IconsChoiceFragment"
         tools:layout="@layout/item_icons_choice"/>
+    <fragment
+        android:id="@+id/historyGroupFragment"
+        android:name="ru.ksart.timefocus.ui.history_group.HistoryGroupFragment"
+        android:label="HistoryGroupFragment"
+        tools:layout="@layout/fragment_history_group">
+        <argument
+            android:name="ActionId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
 </navigation>

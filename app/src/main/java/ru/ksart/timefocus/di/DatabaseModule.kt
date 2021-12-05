@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.ksart.timefocus.model.db.ActionsDatabase
-import ru.ksart.timefocus.model.db.ActionsDatabaseImpl
+import ru.ksart.timefocus.data.db.ActionsDatabase
+import ru.ksart.timefocus.data.db.ActionsDatabaseImpl
 import javax.inject.Singleton
 
 @Module

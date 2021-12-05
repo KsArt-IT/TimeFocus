@@ -1,7 +1,7 @@
 package ru.ksart.timefocus.ui.actions_list.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.ksart.timefocus.model.db.models.ActionNames
+import ru.ksart.timefocus.data.db.models.ActionNames
 
 class ActionsListDiffCallback : DiffUtil.ItemCallback<ActionNames>() {
 

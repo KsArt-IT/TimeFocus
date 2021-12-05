@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import ru.ksart.timefocus.databinding.FragmentIconsChoiceBinding
-import ru.ksart.timefocus.model.data.IconChoice
-import ru.ksart.timefocus.model.data.UiEvent
+import ru.ksart.timefocus.domain.entities.IconChoice
+import ru.ksart.timefocus.data.entities.UiEvent
+import ru.ksart.timefocus.data.entities.UiState
 import ru.ksart.timefocus.ui.action_edit.ActionsEditFragment
 import ru.ksart.timefocus.ui.extension.exhaustive
 import ru.ksart.timefocus.ui.extension.isDarkTheme
@@ -40,7 +41,6 @@ class IconsChoiceFragment :
                 launch {
                     viewModel.uiEvent.collect { event ->
                         when (event) {
-                            is UiEvent.Loading -> loading(event.isLoading)
                             is UiEvent.Toast -> toast(event.stringId)
                             is UiEvent.Error -> toast(event.message)
                             is UiEvent.Success -> {}
@@ -50,7 +50,13 @@ class IconsChoiceFragment :
                 }
                 launch {
                     viewModel.uiState.collectLatest { state ->
-                        state.data?.let(iconsAdapter::submitList)
+                        when (state) {
+                            is UiState.Success -> {
+                                loading(false)
+                                iconsAdapter.submitList(state.data)
+                            }
+                            is UiState.Loading -> loading(true)
+                        }.exhaustive
                     }
                 }
             }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/action_size"
+    android:layout_height="@dimen/action_size"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/indent_small"
+    android:paddingBottom="@dimen/indent_small">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/icon_size_large"
+        android:layout_height="@dimen/icon_size_large"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="@tools:sample/cities" />
+</LinearLayout>

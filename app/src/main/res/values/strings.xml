@@ -2,6 +2,7 @@
     <string name="app_name">TimeFocus</string>
     <string name="empty" />
     <string name="action_add_no_name">No name or icon specified</string>
+    <string name="unexpected_error">An unexpected error occurred</string>
 
 
     <string name="skip_button_text">Skip</string>
@@ -9,6 +10,8 @@
     <string name="action_status_active">Active</string>
     <string name="action_status_pause">Paused</string>
     <string name="action_status_stop">Stopped</string>
+    <string name="action_status_error">Error</string>
+
     <string name="action_name_hint">Action name</string>
     <string name="action_group_text">Group</string>
     <string name="action_suspend_text">Suspend others</string>

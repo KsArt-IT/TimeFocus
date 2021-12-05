@@ -1,8 +1,7 @@
 package ru.ksart.timefocus.ui.icons_choice.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.ksart.timefocus.model.data.IconChoice
-import timber.log.Timber
+import ru.ksart.timefocus.domain.entities.IconChoice
 
 class IconsChoiceDiffCallback : DiffUtil.ItemCallback<IconChoice>() {
 
