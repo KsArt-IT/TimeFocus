@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/actionsEditFragment"
-        android:name="ru.ksart.timefocus.ui.action_edit.ActionsEditFragment"
+        android:name="ru.ksart.timefocus.ui.actions_edit.ActionsEditFragment"
         android:label="ActionsAddFragment"
         tools:layout="@layout/fragment_actions_edit">
         <action
@@ -39,6 +39,9 @@
             app:argType="ru.ksart.timefocus.data.db.models.ActionNames"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_actionsEditFragment_to_actionsForGroupFragment"
+            app:destination="@id/actionsForGroupFragment" />
     </fragment>
     <fragment
         android:id="@+id/iconsChoiceFragment"
@@ -54,5 +57,14 @@
             android:name="ActionId"
             app:argType="long"
             android:defaultValue="0L" />
+    </fragment>
+    <fragment
+        android:id="@+id/actionsForGroupFragment"
+        android:name="ru.ksart.timefocus.ui.actions_list_group.ActionsForGroupFragment"
+        android:label="ActionsForGroupFragment"
+        tools:layout="@layout/fragment_actions_list_for_group">
+        <argument
+            android:name="membersForGroup"
+            app:argType="ru.ksart.timefocus.data.db.models.ActionNames[]" />
     </fragment>
 </navigation>

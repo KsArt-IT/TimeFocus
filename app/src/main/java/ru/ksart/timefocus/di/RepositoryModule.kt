@@ -4,8 +4,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import ru.ksart.timefocus.domain.repositories.ActionsAddRepository
-import ru.ksart.timefocus.data.repositories.ActionsAddRepositoryImpl
+import ru.ksart.timefocus.data.repositories.ActionNamesRepositoryImpl
+import ru.ksart.timefocus.domain.repositories.ActionNamesEditRepository
+import ru.ksart.timefocus.data.repositories.ActionNamesEditRepositoryImpl
 import ru.ksart.timefocus.domain.repositories.ActionsRepository
 import ru.ksart.timefocus.data.repositories.ActionsRepositoryImpl
 import ru.ksart.timefocus.domain.repositories.IconsRepository
@@ -16,6 +17,7 @@ import ru.ksart.timefocus.domain.repositories.OnboardingRepository
 import ru.ksart.timefocus.data.repositories.OnboardingRepositoryImpl
 import ru.ksart.timefocus.domain.repositories.SettingsRepository
 import ru.ksart.timefocus.data.repositories.SettingsRepositoryImpl
+import ru.ksart.timefocus.domain.repositories.ActionNamesRepository
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -31,7 +33,10 @@ interface RepositoryModule {
     fun provideIconsRepository(impl: IconsRepositoryImpl): IconsRepository
 
     @Binds
-    fun provideActionAddRepository(impl: ActionsAddRepositoryImpl): ActionsAddRepository
+    fun provideActionNamesRepository(impl: ActionNamesRepositoryImpl): ActionNamesRepository
+
+    @Binds
+    fun provideActionNamesEditRepository(impl: ActionNamesEditRepositoryImpl): ActionNamesEditRepository
 
     @Binds
     fun provideActionRepository(impl: ActionsRepositoryImpl): ActionsRepository

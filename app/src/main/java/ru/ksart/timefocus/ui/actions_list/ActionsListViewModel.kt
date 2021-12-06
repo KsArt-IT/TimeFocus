@@ -13,13 +13,13 @@ import ru.ksart.timefocus.data.db.models.ActionNames
 import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
 import ru.ksart.timefocus.domain.entities.Results
-import ru.ksart.timefocus.domain.usecase.actions_list.GetActionsListUseCase
+import ru.ksart.timefocus.domain.usecase.actions_list.GetActionNamesListUseCase
 import ru.ksart.timefocus.ui.extension.exhaustive
 import javax.inject.Inject
 
 @HiltViewModel
 class ActionsListViewModel @Inject constructor(
-    private val getActionsList: GetActionsListUseCase,
+    private val getActionNamesList: GetActionNamesListUseCase,
 ) : ViewModel() {
 
     val uiState: StateFlow<UiState<List<ActionNames>>>
@@ -28,7 +28,8 @@ class ActionsListViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
-        uiState = getActionsList.observe()
+
+        uiState = getActionNamesList.observe()
             .mapNotNull { result ->
                 when (result) {
                     is Results.Success -> {

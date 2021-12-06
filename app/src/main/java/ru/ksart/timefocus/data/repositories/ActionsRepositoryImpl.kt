@@ -5,15 +5,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import org.threeten.bp.Instant
-import ru.ksart.timefocus.di.IoDispatcher
-import ru.ksart.timefocus.data.entities.ActionStatus
-import ru.ksart.timefocus.domain.repositories.ActionsRepository
 import ru.ksart.timefocus.data.db.ActionsDatabase
 import ru.ksart.timefocus.data.db.models.ActionIntervals
-import ru.ksart.timefocus.data.db.models.ActionNames
 import ru.ksart.timefocus.data.db.models.ActionWithInfo
 import ru.ksart.timefocus.data.db.models.Actions
 import ru.ksart.timefocus.data.db.models.PomodoroIntervals
+import ru.ksart.timefocus.data.entities.ActionStatus
+import ru.ksart.timefocus.di.IoDispatcher
+import ru.ksart.timefocus.domain.repositories.ActionsRepository
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -109,12 +108,4 @@ class ActionsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getActionNamesByGroupId(groupId: Long): List<ActionNames> =
-        withContext(dispatcher) {
-            db.actionNamesDao().getActionNamesByGroupId(groupId)
-        }
-
-    override suspend fun getActionsNamesWithoutGroup(): List<ActionNames> = withContext(dispatcher) {
-        db.actionNamesDao().getActionsNamesWithoutGroup()
-    }
 }

@@ -1,12 +1,12 @@
 package ru.ksart.timefocus.domain.usecase.actions
 
-import ru.ksart.timefocus.domain.entities.Results
 import ru.ksart.timefocus.data.db.models.ActionNames
-import ru.ksart.timefocus.domain.repositories.ActionsRepository
+import ru.ksart.timefocus.domain.entities.Results
+import ru.ksart.timefocus.domain.repositories.ActionNamesRepository
 import javax.inject.Inject
 
-class GetActionsNamesAllOrByGroupIdUseCase @Inject constructor(
-    private val repository: ActionsRepository
+class GetActionNamesAllOrByGroupIdUseCase @Inject constructor(
+    private val repository: ActionNamesRepository
 ) {
 
     suspend operator fun invoke(params: Long?): Results<List<ActionNames>> {

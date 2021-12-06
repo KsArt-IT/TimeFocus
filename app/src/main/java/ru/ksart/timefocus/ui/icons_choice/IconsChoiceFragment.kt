@@ -15,7 +15,7 @@ import ru.ksart.timefocus.databinding.FragmentIconsChoiceBinding
 import ru.ksart.timefocus.domain.entities.IconChoice
 import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
-import ru.ksart.timefocus.ui.action_edit.ActionsEditFragment
+import ru.ksart.timefocus.ui.actions_edit.ActionsEditFragment
 import ru.ksart.timefocus.ui.extension.exhaustive
 import ru.ksart.timefocus.ui.extension.isDarkTheme
 import ru.ksart.timefocus.ui.extension.toast

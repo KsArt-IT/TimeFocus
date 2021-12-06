@@ -7,6 +7,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -20,7 +21,7 @@ import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
 import ru.ksart.timefocus.domain.entities.Results
 import ru.ksart.timefocus.domain.usecase.actions.CreateActionUseCase
-import ru.ksart.timefocus.domain.usecase.actions.GetActionsNamesAllOrByGroupIdUseCase
+import ru.ksart.timefocus.domain.usecase.actions.GetActionNamesAllOrByGroupIdUseCase
 import ru.ksart.timefocus.domain.usecase.actions.GetActionsWithInfoUseCase
 import ru.ksart.timefocus.domain.usecase.actions.PauseTimerUseCase
 import ru.ksart.timefocus.domain.usecase.actions.StartTimerUseCase
@@ -43,10 +44,11 @@ class ActionsViewModel @Inject constructor(
     private val pauseTimer: PauseTimerUseCase,
     private val stopTimer: StopTimerUseCase,
 
-    private val getActionsNamesAllOrByGroupId: GetActionsNamesAllOrByGroupIdUseCase,
+    private val getActionsNamesAllOrByGroupId: GetActionNamesAllOrByGroupIdUseCase,
 ) : ViewModel() {
 
     private val actionNamesGroupId = MutableStateFlow<Long?>(null)
+    private var actionNamesGroupName = ""
     val uiState: StateFlow<UiState<List<ActionNames>>>
     val uiStateAction: StateFlow<UiState<List<ActionWithInfo>>>
 
@@ -58,9 +60,9 @@ class ActionsViewModel @Inject constructor(
     init {
 
         // _uiState
-        uiState = actionNamesGroupId.mapLatest { newId ->
+        uiState = actionNamesGroupId.mapLatest { groupId ->
             Timber.tag("tag153").d("ActionsViewModel: ActionNames")
-            getActionsNamesAllOrByGroupId(newId)
+            getActionsNamesAllOrByGroupId(groupId)
         }
             .mapNotNull { result ->
                 when (result) {
@@ -127,8 +129,13 @@ class ActionsViewModel @Inject constructor(
 
     private suspend fun selectActionNames(actionNames: ActionNames) {
         if (actionNames.group) {
-            actionNamesGroupId.value =
-                actionNames.groupId?.let { actionNames.id }
+            actionNamesGroupId.value = if (actionNames.id > 0) {
+                actionNamesGroupName = actionNames.name
+                actionNames.id
+            } else {
+                actionNamesGroupName = ""
+                null
+            }
         } else {
             try {
                 createAction(actionNames.id)

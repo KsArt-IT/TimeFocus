@@ -13,7 +13,7 @@
     <string name="action_status_error">Error</string>
 
     <string name="action_name_hint">Action name</string>
-    <string name="action_group_text">Group</string>
+
     <string name="action_suspend_text">Suspend others</string>
     <string name="action_suspend_all_text">Suspend all others</string>
     <string name="action_pomodoro_text">Pomodoro time management</string>
@@ -24,5 +24,14 @@
     <string name="icon_choice_title">Select an icon</string>
     <string name="press_back_exit">Press back again to exit!</string>
 
+    <string name="action_name_edit_cancel_button_description">Cancel</string>
+    <string name="action_name_edit_create_button_description">Create</string>
+
+    <string name="action_group_text">Group</string>
+    <string name="action_group_and_members_text">Group and members</string>
+    <string name="action_name_edit_add_group_member_button_description">Add member to the group</string>
+    <string name="action_add_members_for_group_title">Choose for the group</string>
+    <string name="action_add_group_error">Group save error!</string>
+    <string name="action_add_group_no_members">Nothing to add</string>
 
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/indent_small">
@@ -10,6 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent"
+        android:contentDescription="@string/action_name_edit_cancel_button_description"
+        android:minHeight="48dp"
         android:src="@drawable/ic_close_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,6 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent"
+        android:contentDescription="@string/action_name_edit_create_button_description"
+        android:minHeight="48dp"
         android:src="@drawable/ic_check_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,22 +52,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
-        android:id="@+id/group"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/action_group_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actionNameLayout" />
-
-    <CheckBox
         android:id="@+id/suspend"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/action_suspend_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        app:layout_constraintTop_toBottomOf="@id/actionNameLayout" />
 
     <CheckBox
         android:id="@+id/suspendAll"
@@ -129,10 +125,51 @@
         android:layout_height="@dimen/icon_size"
         android:backgroundTint="@color/transparent"
         android:src="@drawable/ic_check_24"
+        app:layout_constraintBottom_toBottomOf="@+id/iconColor"
         app:layout_constraintEnd_toEndOf="@id/iconFileTitle"
         app:layout_constraintStart_toStartOf="@id/iconFileTitle"
         app:layout_constraintTop_toTopOf="@id/iconColor"
-        app:layout_constraintBottom_toBottomOf="@+id/iconColor"
         app:tint="@color/black" />
+
+    <!-- For group -->
+    <CheckBox
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_group_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iconFile" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_actions_list" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addGroupMember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/indent_large"
+        android:contentDescription="@string/action_name_edit_add_group_member_button_description"
+        android:src="@drawable/ic_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/actionNameGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="recycler,addGroupMember"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
