@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -21,7 +20,8 @@ import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
 import ru.ksart.timefocus.domain.entities.Results
 import ru.ksart.timefocus.domain.usecase.actions.CreateActionUseCase
-import ru.ksart.timefocus.domain.usecase.actions.GetActionNamesAllOrByGroupIdUseCase
+import ru.ksart.timefocus.domain.usecase.actions.GetActionNamesGroupByGroupIdUseCase
+import ru.ksart.timefocus.domain.usecase.actions.GetActionNamesWithoutGroupUseCase
 import ru.ksart.timefocus.domain.usecase.actions.GetActionsWithInfoUseCase
 import ru.ksart.timefocus.domain.usecase.actions.PauseTimerUseCase
 import ru.ksart.timefocus.domain.usecase.actions.StartTimerUseCase
@@ -44,7 +44,9 @@ class ActionsViewModel @Inject constructor(
     private val pauseTimer: PauseTimerUseCase,
     private val stopTimer: StopTimerUseCase,
 
-    private val getActionsNamesAllOrByGroupId: GetActionNamesAllOrByGroupIdUseCase,
+    private val getActionsNames: GetActionNamesWithoutGroupUseCase,
+    private val getActionsNamesByGroupId: GetActionNamesGroupByGroupIdUseCase,
+//    private val getActionsNamesAllOrByGroupId: GetActionNamesAllOrByGroupIdUseCase,
 ) : ViewModel() {
 
     private val actionNamesGroupId = MutableStateFlow<Long?>(null)
@@ -58,11 +60,28 @@ class ActionsViewModel @Inject constructor(
     val uiAction: (UiAction<ActionWithInfo>) -> Unit
 
     init {
-
         // _uiState
-        uiState = actionNamesGroupId.mapLatest { groupId ->
-            Timber.tag("tag153").d("ActionsViewModel: ActionNames")
-            getActionsNamesAllOrByGroupId(groupId)
+        uiState = actionNamesGroupId.flatMapLatest { groupId ->
+            groupId?.let { getActionsNamesByGroupId.observe(it) } ?: getActionsNames.observe()
+        }.mapNotNull { result ->
+            when (result) {
+                is Results.Success -> UiState.Success(result.data)
+                is Results.Error -> {
+                    _uiEvent.send(UiEvent.Error(result.message))
+                    null
+                }
+            }.exhaustive
+        }
+            .stateIn(
+                scope = viewModelScope,
+                started = WhileSubscribed(stopTimeoutMillis = 5000),
+                initialValue = UiState.Loading
+            )
+        // _uiState
+/*
+        uiState = actionNamesGroupId.mapLatest { group ->
+//            Timber.tag("tag153").d("ActionsViewModel: ActionNames")
+            getActionsNamesAllOrByGroupId(group.first)
         }
             .mapNotNull { result ->
                 when (result) {
@@ -78,6 +97,7 @@ class ActionsViewModel @Inject constructor(
                 started = WhileSubscribed(stopTimeoutMillis = 5000),
                 initialValue = UiState.Loading
             )
+*/
 
         // _uiStateAction
         uiStateAction = getActionsWithInfo.observe()

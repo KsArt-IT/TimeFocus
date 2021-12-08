@@ -10,6 +10,7 @@ object ActionNamesContract {
 
         const val GROUP = "group" // Показатель группы активностей
         const val GROUP_ID = "group_id" // Принадлежность к группе
+        const val GROUP_COUNT = "group_count" // Количество в группе
 
         const val SUSPEND = "suspend" // При старте активности, будет применена автоматическая пауза для активностей с id таблицы ActionSuspend
         const val SUSPEND_ALL = "suspend_all" // При старте активности, будет применена автоматическая пауза для всех активностей

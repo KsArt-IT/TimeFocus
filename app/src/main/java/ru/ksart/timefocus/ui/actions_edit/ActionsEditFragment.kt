@@ -48,6 +48,11 @@ class ActionsEditFragment :
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        saveActionName()
+    }
+
     override fun initList() {
         binding.recycler.run {
             adapter = ActionsEditGroupAdapter()

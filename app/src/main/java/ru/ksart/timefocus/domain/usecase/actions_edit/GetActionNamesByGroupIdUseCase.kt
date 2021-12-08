@@ -21,7 +21,7 @@ class GetActionNamesByGroupIdUseCase @Inject constructor(
 
     }
 
-    fun observe(params: Long?): Flow<Results<List<ActionNames>>> {
+    fun observe(params: Long): Flow<Results<List<ActionNames>>> {
         return repository.actionNamesByGroupId(params)
             .mapLatest { Results.Success(it) }
             .catch { Results.Error(it.localizedMessage ?: "An unexpected error occurred") }

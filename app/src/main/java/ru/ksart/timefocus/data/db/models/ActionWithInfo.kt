@@ -38,9 +38,9 @@ data class ActionWithInfo(
     @ColumnInfo(name = ActionNamesContract.Columns.ICON)
     val icon: String,
 
-//    @ColumnInfo(name = ActionsContract.Columns.TIMES_ACTION)
-    @Ignore
-    val times: Long = 0,
+    @ColumnInfo(name = ActionsContract.Columns.TIMES_ACTION)
+//    @Ignore
+    val times: Long? = 0,
     @Ignore
     var current: Long = 0,
     @Ignore
@@ -64,6 +64,7 @@ data class ActionWithInfo(
 
         color: Int = -0x1000000,//0xFF000000 Black
         icon: String,
+        times: Long? = 0,
     ) : this(
         id = id,
         actionNamesId = actionNamesId,
@@ -78,7 +79,7 @@ data class ActionWithInfo(
         pomodoroSwitchId = pomodoroSwitchId,
         color = color,
         icon = icon,
-        times = 0,
+        times = times,
 
         current = 0,
         statusFlow = null,

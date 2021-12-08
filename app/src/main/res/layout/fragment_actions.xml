@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical"
     android:padding="@dimen/indent_small">
 
@@ -31,14 +32,6 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineActions"
         tools:itemCount="5"
         tools:listitem="@layout/item_actions_name" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/indent_large"
-        android:src="@drawable/ic_add_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineActions"

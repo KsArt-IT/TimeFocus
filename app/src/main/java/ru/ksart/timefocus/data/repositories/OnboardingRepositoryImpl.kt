@@ -16,7 +16,17 @@ class OnboardingRepositoryImpl @Inject constructor() : OnboardingRepository {
         OnboardingScreen(
             title = R.string.onboarding_title_second,
             text = R.string.onboarding_text_second,
-            image = R.drawable.onboarding_image_first,
+            image = R.drawable.onboarding_creation_actions,
+        ),
+        OnboardingScreen(
+            title = R.string.onboarding_title_third,
+            text = R.string.onboarding_text_third,
+            image = R.drawable.onboarding_start_actions,
+        ),
+        OnboardingScreen(
+            title = R.string.onboarding_title_fourth,
+            text = R.string.onboarding_text_fourth,
+            image = R.drawable.onboarding_history_actions,
         ),
     )
 

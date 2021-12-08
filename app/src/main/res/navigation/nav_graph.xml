@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_onboardingFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="isHelp"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -25,6 +29,12 @@
         <action
             android:id="@+id/action_mainFragment_to_historyGroupFragment"
             app:destination="@id/historyGroupFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/actionsEditFragment"
@@ -67,4 +77,8 @@
             android:name="membersForGroup"
             app:argType="ru.ksart.timefocus.data.db.models.ActionNames[]" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.ksart.timefocus.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

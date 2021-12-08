@@ -1,11 +1,14 @@
 package ru.ksart.timefocus.ui.onboarding
 
+import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -17,6 +20,7 @@ import ru.ksart.timefocus.data.entities.DepthTransformation
 import ru.ksart.timefocus.domain.entities.OnboardingScreen
 import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
+import ru.ksart.timefocus.ui.actions_edit.ActionsEditFragmentArgs
 import ru.ksart.timefocus.ui.extension.exhaustive
 import ru.ksart.timefocus.ui.extension.toast
 import ru.ksart.timefocus.ui.main.BaseFragment
@@ -28,6 +32,16 @@ class OnboardingFragment :
     BaseFragment<FragmentOnboardingBinding>(FragmentOnboardingBinding::inflate) {
 
     private val viewModel: OnboardingViewModel by viewModels()
+
+    private val args: OnboardingFragmentArgs by navArgs()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (savedInstanceState == null) {
+            if (args.isHelp) viewModel.requestScreens()
+            else viewModel.initFirstData()
+        }
+    }
 
     override fun initObserve() {
         Timber.tag("tag153").d("OnboardingFragment start")
@@ -92,6 +106,7 @@ class OnboardingFragment :
 
     private fun showMainFragment() {
         Timber.tag("tag153").d("showMainFragment")
-        findNavController().navigate(R.id.action_onboardingFragment_to_mainFragment)
+        if (args.isHelp) findNavController().popBackStack()
+        else findNavController().navigate(R.id.action_onboardingFragment_to_mainFragment)
     }
 }

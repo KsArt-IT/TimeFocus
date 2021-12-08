@@ -65,7 +65,7 @@ class IconsChoiceFragment :
 
     override fun initList() {
         binding.recycler.run {
-            adapter = IconsChoiceAdapter(::selectIcon, context.isDarkTheme)
+            adapter = IconsChoiceAdapter(::selectIcon)
             layoutManager = GridLayoutManager(requireContext().applicationContext, 4)
             setHasFixedSize(true)
             isNestedScrollingEnabled = false

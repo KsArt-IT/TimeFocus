@@ -38,6 +38,8 @@ data class ActionNames(
     val group: Boolean = false,
     @ColumnInfo(name = ActionNamesContract.Columns.GROUP_ID)
     val groupId: Long? = null,
+    @ColumnInfo(name = ActionNamesContract.Columns.GROUP_COUNT)
+    val groupCount: Int = 0,
 
     @ColumnInfo(name = ActionNamesContract.Columns.SUSPEND)
     val suspend: Boolean = false,

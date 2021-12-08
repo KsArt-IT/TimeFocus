@@ -4,60 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical"
     android:padding="@dimen/indent_large">
-
-    <ImageView
-        android:id="@+id/logoOnboarding"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_little"
-        app:layout_constraintEnd_toEndOf="@+id/guideline1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageOnboarding"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/indent_small"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginBottom="@dimen/indent_small"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/titleOnboarding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoOnboarding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/titleOnboarding"
-        style="?attr/textAppearanceHeadline3"
+        style="?attr/textAppearanceHeadline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_small"
+        android:layout_marginBottom="@dimen/indent_small"
         android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/textOnboarding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageOnboarding"
         tools:text="@tools:sample/lorem" />
 
     <TextView
         android:id="@+id/textOnboarding"
-        style="?attr/textAppearanceHeadline5"
+        style="?attr/textAppearanceHeadline6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/indent_small"
+        android:layout_marginBottom="80dp"
         android:ellipsize="end"
         android:gravity="center"
         android:lines="3"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleOnboarding"
         tools:text="@tools:sample/lorem/random" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

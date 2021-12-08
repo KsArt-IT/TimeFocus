@@ -18,6 +18,8 @@
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
+        style="?attr/textAppearanceCaption"
+        android:gravity="start"
         tools:text="@tools:sample/cities"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/indent_small"
@@ -28,7 +30,7 @@
 
     <TextView
         android:id="@+id/times"
-        style="?attr/textAppearanceHeadline5"
+        style="?attr/textAppearanceBody1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,6 +40,7 @@
 
     <TextView
         android:id="@+id/timer"
+        style="?attr/textAppearanceBody2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/indent_small"

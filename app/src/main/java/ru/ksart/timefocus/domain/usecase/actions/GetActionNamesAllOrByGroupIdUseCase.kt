@@ -1,12 +1,21 @@
 package ru.ksart.timefocus.domain.usecase.actions
 
+import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import ru.ksart.timefocus.R
 import ru.ksart.timefocus.data.db.models.ActionNames
+import ru.ksart.timefocus.data.db.models.ActionWithInfo
 import ru.ksart.timefocus.domain.entities.Results
 import ru.ksart.timefocus.domain.repositories.ActionNamesRepository
 import javax.inject.Inject
 
 class GetActionNamesAllOrByGroupIdUseCase @Inject constructor(
-    private val repository: ActionNamesRepository
+    @ApplicationContext private val context: Context,
+    private val repository: ActionNamesRepository,
 ) {
 
     suspend operator fun invoke(params: Long?): Results<List<ActionNames>> {
@@ -25,7 +34,7 @@ class GetActionNamesAllOrByGroupIdUseCase @Inject constructor(
                     // добавим пустой элемент для возврата из группы
                     ActionNames(
                         id = 0,
-                        name = "",
+                        name = context.getString(R.string.action_back_name),
                         description = null,
                         group = true,
                         groupId = null,

@@ -30,6 +30,7 @@ class ActionNamesViewHolder(
             name.text = item.name
             icon.loadSvgFromAsset(item.icon)
             icon.setColorFilter(item.color, PorterDuff.Mode.SRC_IN)
+            groupCounter.text = if (item.group && item.id > 0) item.groupCount.toString() else ""
         }
     }
 

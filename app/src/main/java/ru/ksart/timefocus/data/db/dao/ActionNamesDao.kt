@@ -25,7 +25,7 @@ interface ActionNamesDao {
     suspend fun removeGroupIdFromActionNames(groupId: Long)
 
     @Query("SELECT * FROM ${ActionNamesContract.TABLE_NAME} WHERE ${ActionNamesContract.Columns.GROUP_ID} IS NULL AND ${ActionNamesContract.Columns.ARCHIVE} = 0 ORDER BY ${ActionNamesContract.Columns.NUMBER} ASC")
-    fun getActionNames(): Flow<List<ActionNames>>
+    fun actionNames(): Flow<List<ActionNames>>
 
 //    @Query("SELECT * FROM ${ActionNamesContract.TABLE_NAME} WHERE ${ActionNamesContract.Columns.GROUP_ID} = :groupId ORDER BY ${ActionNamesContract.Columns.NUMBER} ASC")
 //    fun getFlowActionsGroupById(groupId: Long): Flow<List<ActionNames>>
@@ -42,8 +42,11 @@ interface ActionNamesDao {
 //    @Query("SELECT * FROM ${ActionNamesContract.TABLE_NAME} WHERE ${ActionNamesContract.Columns.GROUP_ID} > 0 ORDER BY ${ActionNamesContract.Columns.NUMBER} ASC")
 //    fun getActionsNamesWithGroup(): Flow<List<ActionNames>>
 
-    @Query("SELECT * FROM ${ActionNamesContract.TABLE_NAME} WHERE ${ActionNamesContract.Columns.GROUP_ID} IS NULL ORDER BY ${ActionNamesContract.Columns.NUMBER} ASC")
-    suspend fun getActionsNamesWithoutGroup(): List<ActionNames>
+    @Query("SELECT * FROM ${ActionNamesContract.TABLE_NAME} WHERE ${ActionNamesContract.Columns.GROUP_ID} IS NULL AND ${ActionNamesContract.Columns.ARCHIVE} = 0 ORDER BY ${ActionNamesContract.Columns.NUMBER} ASC")
+    fun actionNamesWithoutGroup(): Flow<List<ActionNames>>
+
+    @Query("SELECT * FROM ${ActionNamesContract.TABLE_NAME} WHERE ${ActionNamesContract.Columns.GROUP_ID} IS NULL AND ${ActionNamesContract.Columns.ARCHIVE} = 0 ORDER BY ${ActionNamesContract.Columns.NUMBER} ASC")
+    suspend fun getActionNamesWithoutGroup(): List<ActionNames>
 
 //    @Query("SELECT * FROM ${ActionNamesContract.TABLE_NAME} WHERE ${ActionNamesContract.Columns.ARCHIVE} > 0 ORDER BY ${ActionNamesContract.Columns.NUMBER} ASC")
 //    suspend fun getActionNamesArchive(): List<ActionNames>

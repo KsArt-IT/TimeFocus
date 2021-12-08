@@ -27,6 +27,7 @@ class ActionsListViewHolder(
 //            description.text = item.description
             iconItem.loadSvgFromAsset(item.icon)
             iconItem.setColorFilter(item.color, PorterDuff.Mode.SRC_IN)
+            groupCounter.text = if (item.group) item.groupCount.toString() else ""
         }
     }
 

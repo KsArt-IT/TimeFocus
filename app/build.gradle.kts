@@ -94,8 +94,6 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.1.1")
     // DateTime
     implementation("com.jakewharton.threetenabp:threetenabp:1.3.1")
-    // To use only without reflection variants of viewBinding
-    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.3")
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 

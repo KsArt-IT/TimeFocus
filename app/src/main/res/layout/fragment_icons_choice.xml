@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/indent_small">
+    android:background="?attr/colorSurface"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/Theme.TimeFocus.ToolbarStyle"
+        android:layout_height="?attr/actionBarSize"
         android:gravity="center"
         android:text="@string/icon_choice_title" />
 
@@ -23,7 +24,7 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/indent_small"
+        android:layout_margin="@dimen/indent_small"
         tools:itemCount="5"
         tools:listitem="@layout/item_icons_choice" />
 </LinearLayout>

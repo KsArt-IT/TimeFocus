@@ -90,6 +90,9 @@ class ActionsEditViewModel @Inject constructor(
                 Timber.tag("tag153")
                     .d("ActionsEditViewModel: addActionNames -----------------------")
                 if (actionNames.name.isNotBlank() && actionNames.icon.isNotBlank()) {
+                    actionNames = actionNames.copy(
+                        groupCount = if (actionNames.group && groupMembers.isNotEmpty()) groupMembers.size else 0
+                    )
                     if (actionNames.id == 0L) createActionNames(actionNames)
                     else updateActionNames(actionNames)
                     // получить groupId если его нет
@@ -104,7 +107,7 @@ class ActionsEditViewModel @Inject constructor(
                     // сохранить группу
                     if (actionNames.group && groupMembers.isNotEmpty()) {
                         if (groupId > 0) {
-                            // запросить сначала старый список и сравнить с новым
+                            // обновим
                             groupMembers.forEach { action ->
                                 Timber.tag("tag153")
                                     .d("ActionsEditViewModel: addActionNames group add id=${action.id}")

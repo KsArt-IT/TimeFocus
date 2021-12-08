@@ -33,5 +33,11 @@
     <string name="action_add_members_for_group_title">Choose for the group</string>
     <string name="action_add_group_error">Group save error!</string>
     <string name="action_add_group_no_members">Nothing to add</string>
+<!--    More Fragment   -->
+    <string name="more_settings_button_text">Settings</string>
+    <string name="more_help_button_text">Help</string>
+    <string name="more_about_button_text">About</string>
+    <string name="action_add_title">Adding action</string>
+    <string name="action_back_name">Back</string>
 
 </resources>

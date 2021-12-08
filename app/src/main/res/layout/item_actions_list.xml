@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/iconItem"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
+        android:layout_width="@dimen/icon_size_large"
+        android:layout_height="@dimen/icon_size_large"
         android:src="@drawable/ic_check_24"
         android:backgroundTint="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,6 +19,7 @@
 
     <TextView
         android:id="@+id/actionName"
+        style="?attr/textAppearanceCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/indent_small"
@@ -29,6 +30,7 @@
 
     <TextView
         android:id="@+id/groupCounter"
+        style="?attr/textAppearanceBody1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

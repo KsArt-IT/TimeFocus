@@ -74,7 +74,7 @@ class ActionsViewHolder(
                 binding.run {
                     item?.let {
                         timer.text = it.current.displayTime()
-                        val timeAll = it.current + it.times
+                        val timeAll = it.current + (it.times ?: 0)
                         binding.times.text = timeAll.displayTime()
                     }
                 }

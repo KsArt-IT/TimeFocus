@@ -2,15 +2,98 @@
     <!-- Base application theme. -->
     <style name="Theme.TimeFocus" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/grey_800_dark</item>
+        <item name="colorPrimaryVariant">@color/grey_900_dark</item>
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">@color/grey_900</item>
+        <item name="colorSecondaryVariant">@color/grey_800_dark</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!--        <item name="android:background">?attr/colorSurface</item>-->
+        <item name="android:textAllCaps">false</item>
+        <item name="textAppearanceCaption">@style/Theme.TimeFocus.Caption</item>
+        <item name="textAppearanceBody1">@style/Theme.TimeFocus.Body1</item>
+        <item name="textAppearanceBody2">@style/Theme.TimeFocus.Body2</item>
+        <item name="toolbarStyle">@style/Theme.TimeFocus.ToolbarStyle</item>
+        <item name="bottomNavigationStyle">@style/Theme.TimeFocus.BottomNavigationStyle</item>
+        <item name="materialButtonStyle">@style/Theme.TimeFocus.Button</item>
     </style>
+
+    <style name="Theme.TimeFocus.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textColorHint">?attr/colorOnPrimary</item>
+        <item name="android:colorControlActivated">?attr/colorOnPrimary</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginStart">@dimen/indent_small</item>
+        <item name="android:layout_marginEnd">@dimen/indent_small</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Theme.TimeFocus.CheckBox" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Theme.TimeFocus.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="Theme.TimeFocus.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="Theme.TimeFocus.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="Theme.TimeFocus.ToolbarStyle" parent="Widget.MaterialComponents.Toolbar.Surface">
+        <item name="android:elevation">0dp</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Theme.TimeFocus.BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView.PrimarySurface">
+        <item name="android:elevation">8dp</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="labelVisibilityMode">selected</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Theme.TimeFocus.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+
+        <item name="android:backgroundTint">@color/transparent</item>
+        <item name="android:tint">?attr/colorOnPrimary</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:enabled">true</item>
+        <item name="android:lines">1</item>
+    </style>
+
 </resources>

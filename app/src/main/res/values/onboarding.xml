@@ -3,11 +3,15 @@
     <string name="onboarding_title_first">TimeTracker + Pomodoro</string>
     <string name="onboarding_text_first">Time tracker with pomodoro technology connection and event notification.</string>
 
-    <string name="onboarding_title_second">Adding Activities</string>
-    <string name="onboarding_text_second">First add all the required activities</string>
+    <string name="onboarding_title_second">Adding Actions</string>
+    <string name="onboarding_text_second">First add all the required actions</string>
 
-    <string name="onboarding_title_third"></string>
-    <string name="onboarding_title_fourth"></string>
+    <string name="onboarding_title_third">Start Actions</string>
+    <string name="onboarding_text_third">Track your activity constantly</string>
+
+    <string name="onboarding_title_fourth">History Actions</string>
+    <string name="onboarding_text_fourth">View your activity history</string>
+
     <string name="onboarding_title_fifth"></string>
     <string name="onboarding_title_sixth"></string>
     <string name="onboarding_title_seventh"></string>
