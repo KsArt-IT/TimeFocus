@@ -1,35 +1,48 @@
-# The final task is only a set of requirements! Feel free to improvise!
+# TimeTracker + Pomodoro
 
-You can implement anything, it's totally up to you. Working in a team is prohibited.
+Time tracker with pomodoro technology connection and event notification.
+<p>
+<img src="./img/TimeFocus.svg" width="25%" height="25%">
+</p>
 
-### Requirements:
-- Clean Architecture should be used on the app level. The code suould be divided to data, domain and presentation layers. See the example with data flow below:
-<img src="./img/App-level.svg">
+- [Time management](https://en.wikipedia.org/wiki/Time_management)
+- [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique)
 
-- MVVM/MVI architecure should be used on presentation layer. On presentation level we are working with UI-level/Domain-level models, data layer models are prohoboted. See the example below:
-<img src="./img/Presentation.svg">
+## Help
 
-- Kotlin Coroutines should be used for async/concurrent operations.
+- [Adding Actions] First add all the required actions
+<p>
+<img src="./img/CreationActions.png" width="25%" height="25%">
+</p>
+- [Start Actions] Track your activity constantly
+<p>
+<img src="./img/StartActions.png" width="25%" height="25%">
+</p>
+- [History Actions] View your activity history
+<p>
+<img src="./img/HistoryActions.png" width="25%" height="25%">
+</p>
 
-- Coroutines Flow should be used instead of LiveData on Presentation layer.
+## Architecture
 
-- Dependency Injection should be implemented using Dagger/Hilt.
+- [MVVM]
+- [Clean-Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+- [Use Case]
+<p>
+<img src="./img/CleanArchitecture.png" width="100%" height="100%"/>
+</p>
 
-- For navigation Jetpack Navigation component should be used.
+## Technologies
 
-- App should support dark and light themes and have settings screen.
-
-- All ViewModels have to be covered by unit tests
-
-## Evaluation criteria
-Before the deadline, every student have to make a short(up to 10 minutes) recording of app presentation in **English**. Presentation should contain information about the idea of the app, used technologies and a brief demo of the main functionality.
-
-The following message should be sent to the #final-task discord channel:
-
-- Name: Name Surname
-- Location < location e.g. Minsk, Belarus >
-- Discord: < discord nick >
-- Github: < github nick >
-- Mentor: Name Surname
-- App: < link to the github repo >
-- Demo: < link to the recorded video >
+- [Kotlin](https://kotlinlang.org/) - %100 Kotlin
+- [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
+- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) for asynchronous operations
+- [StateFlow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/)
+- [Lifecycle-ktx](https://developer.android.com/kotlin/ktx)
+- [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+- [Navigation](https://developer.android.com/guide/navigation)
+- [View Binding](https://developer.android.com/topic/libraries/view-binding)
+- [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) for
+  Dependency Injection
+- [Room](https://developer.android.com/training/data-storage/room) for managing a local SQLite  database
+- [Glide](https://github.com/bumptech/glide) for image loading

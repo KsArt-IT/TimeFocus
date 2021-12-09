@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TimeFocus</string>
     <string name="empty" />
+
     <string name="action_add_no_name">No name or icon specified</string>
     <string name="unexpected_error">An unexpected error occurred</string>
 
