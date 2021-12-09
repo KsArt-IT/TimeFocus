@@ -46,7 +46,6 @@ class ActionsViewModel @Inject constructor(
 
     private val getActionsNames: GetActionNamesWithoutGroupUseCase,
     private val getActionsNamesByGroupId: GetActionNamesGroupByGroupIdUseCase,
-//    private val getActionsNamesAllOrByGroupId: GetActionNamesAllOrByGroupIdUseCase,
 ) : ViewModel() {
 
     private val actionNamesGroupId = MutableStateFlow<Long?>(null)
@@ -77,28 +76,6 @@ class ActionsViewModel @Inject constructor(
                 started = WhileSubscribed(stopTimeoutMillis = 5000),
                 initialValue = UiState.Loading
             )
-        // _uiState
-/*
-        uiState = actionNamesGroupId.mapLatest { group ->
-//            Timber.tag("tag153").d("ActionsViewModel: ActionNames")
-            getActionsNamesAllOrByGroupId(group.first)
-        }
-            .mapNotNull { result ->
-                when (result) {
-                    is Results.Success -> UiState.Success(result.data)
-                    is Results.Error -> {
-                        _uiEvent.send(UiEvent.Error(result.message))
-                        null
-                    }
-                }.exhaustive
-            }
-            .stateIn(
-                scope = viewModelScope,
-                started = WhileSubscribed(stopTimeoutMillis = 5000),
-                initialValue = UiState.Loading
-            )
-*/
-
         // _uiStateAction
         uiStateAction = getActionsWithInfo.observe()
             .mapNotNull { result ->

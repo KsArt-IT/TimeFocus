@@ -100,4 +100,15 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0-RC")
+//    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+    // Mockito framework
+//    testImplementation("org.mockito:mockito-inline:3.10.0")
+//    testImplementation("org.mockito:mockito-core:3.10.0")
+    // mockk
+    val mockkVers = "1.12.1"
+    testImplementation("io.mockk:mockk:$mockkVers")
+    testImplementation("io.mockk:mockk-agent-jvm:$mockkVers")
+    testImplementation("app.cash.turbine:turbine:0.7.0")
 }

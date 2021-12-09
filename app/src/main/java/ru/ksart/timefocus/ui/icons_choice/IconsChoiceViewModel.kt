@@ -8,10 +8,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import ru.ksart.timefocus.domain.usecase.icons.GetIconsUseCase
-import ru.ksart.timefocus.domain.entities.IconChoice
 import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
+import ru.ksart.timefocus.domain.entities.IconChoice
+import ru.ksart.timefocus.domain.entities.Results
+import ru.ksart.timefocus.domain.usecase.icons.GetIconsUseCase
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -29,11 +30,9 @@ class IconsChoiceViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             Timber.tag("tag153").d("IconsChoiceViewModel: requestScreens")
-            // передаем состояние
-            try {
-                _uiState.value = UiState.Success(getIcons())
-            } catch (e: Exception) {
-                _uiEvent.send(UiEvent.Error(e.localizedMessage ?: "An unexpected error occurred"))
+            when (val result: Results<List<IconChoice>> = getIcons()) {
+                is Results.Success -> _uiState.value = UiState.Success(result.data)
+                is Results.Error -> _uiEvent.send(UiEvent.Error(result.message))
             }
         }
     }

@@ -19,18 +19,17 @@ import ru.ksart.timefocus.data.entities.UiAction
 import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
 import ru.ksart.timefocus.domain.entities.Results
-import ru.ksart.timefocus.domain.usecase.actions.GetActionIntervalsUseCase
+import ru.ksart.timefocus.domain.usecase.actions.GetActionHistoryUseCase
 import ru.ksart.timefocus.ui.extension.exhaustive
 import ru.ksart.timefocus.ui.extension.minusDay
 import ru.ksart.timefocus.ui.extension.plusDay
 import ru.ksart.timefocus.ui.extension.toDateFormat
-import ru.ksart.timefocus.ui.extension.toTimeDisplay
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
-    private val getActionIntervals: GetActionIntervalsUseCase,
+    private val getActionHistory: GetActionHistoryUseCase,
 ) : ViewModel() {
 
     val uiState: StateFlow<UiState<HistoryActions>>
@@ -45,22 +44,10 @@ class HistoryViewModel @Inject constructor(
 
         uiState = historyDate.flatMapLatest { date ->
             Timber.tag("tag153").d("HistoryViewModel date=${date.toDateFormat()}")
-            getActionIntervals.observe(date)
+            getActionHistory.observe(date)
         }.mapNotNull { result ->
             when (result) {
-                is Results.Success -> {
-                    Timber.tag("tag153").d("HistoryViewModel list=${result.data.size}")
-                    val timeSum = result.data.sumOf {
-                        it.stopDate.epochSecond - it.startDate.epochSecond
-                    }
-                    UiState.Success(
-                        HistoryActions(
-                            intervals = result.data,
-                            date = historyDate.value.toDateFormat(),
-                            timeSum = timeSum.toTimeDisplay(),
-                        )
-                    )
-                }
+                is Results.Success -> UiState.Success(result.data)
                 is Results.Error -> {
                     _uiEvent.send(UiEvent.Error(result.message))
                     null

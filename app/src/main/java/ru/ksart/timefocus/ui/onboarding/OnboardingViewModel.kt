@@ -11,9 +11,11 @@ import kotlinx.coroutines.launch
 import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
 import ru.ksart.timefocus.domain.entities.OnboardingScreen
+import ru.ksart.timefocus.domain.entities.Results
 import ru.ksart.timefocus.domain.usecase.onboarding.CheckStartFirstUseCase
 import ru.ksart.timefocus.domain.usecase.onboarding.GetOnboardingScreensUseCase
 import ru.ksart.timefocus.domain.usecase.onboarding.InitDataUseCase
+import ru.ksart.timefocus.ui.extension.exhaustive
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -73,7 +75,9 @@ class OnboardingViewModel @Inject constructor(
     }
 
     private suspend fun showOnboardingScreens() {
-        val list = getOnboardingScreens()
-        _uiState.value = UiState.Success(list)
+        when(val result = getOnboardingScreens()) {
+            is Results.Success -> _uiState.value = UiState.Success(result.data)
+            is Results.Error -> _uiEvent.send(UiEvent.Error(result.message))
+        }.exhaustive
     }
 }
