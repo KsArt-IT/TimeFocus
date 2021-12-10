@@ -21,4 +21,10 @@
     <color name="green">#FF388E3C</color>
     <color name="blue">#FF0288D1</color>
     <color name="red">#FFD32F2F</color>
+
+    <color name="red_300_dark">#af4448</color>
+    <color name="red_300_light">#ffa4a2</color>
+
+    <color name="blue_300_dark">#2286c3</color>
+    <color name="blue_300_light">#9be7ff</color>
 </resources>

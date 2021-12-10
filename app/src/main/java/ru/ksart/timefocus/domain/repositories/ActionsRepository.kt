@@ -6,10 +6,11 @@ import ru.ksart.timefocus.data.db.models.ActionWithInfo
 
 interface ActionsRepository {
 
-    suspend fun addAction(actionNamesId: Long) : Long
+    suspend fun isActiveActionsByActionsNameId(actionNamesId: Long): Boolean
+    suspend fun addAction(actionNamesId: Long): Boolean
     suspend fun changeActionStatus(action: ActionWithInfo)
     suspend fun stopAction(action: ActionWithInfo)
 
-    fun getActionsWithInfo() : Flow<List<ActionWithInfo>>
+    fun getActionsWithInfo(): Flow<List<ActionWithInfo>>
 
 }

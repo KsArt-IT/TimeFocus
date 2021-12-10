@@ -9,15 +9,14 @@
     <TextView
         android:id="@+id/actionAddTitle"
         style="@style/Theme.TimeFocus.ToolbarStyle"
-        android:backgroundTint="?attr/colorSurface"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="?attr/colorSurface"
         android:gravity="center"
         android:text="@string/action_add_title"
-        app:layout_constraintStart_toEndOf="@+id/cancelButton"
         app:layout_constraintEnd_toStartOf="@+id/createButton"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintStart_toEndOf="@+id/cancelButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/cancelButton"
@@ -26,10 +25,9 @@
         android:backgroundTint="?attr/colorSurface"
         android:contentDescription="@string/action_name_edit_cancel_button_description"
         android:src="@drawable/ic_close_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/actionAddTitle"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/createButton"
@@ -37,8 +35,8 @@
         android:layout_height="?attr/actionBarSize"
         android:backgroundTint="?attr/colorSurface"
         android:contentDescription="@string/action_name_edit_create_button_description"
-        app:layout_constraintBottom_toBottomOf="@+id/actionAddTitle"
         android:src="@drawable/ic_check_24"
+        app:layout_constraintBottom_toBottomOf="@+id/actionAddTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,7 +81,7 @@
         android:layout_marginStart="@dimen/indent_large"
         android:enabled="false"
         android:text="@string/action_suspend_all_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/suspend" />
 
@@ -93,7 +91,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/action_pomodoro_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/suspendAll" />
 
@@ -108,6 +106,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pomodoro" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/indent_small"
+        android:text="@string/action_start_mode_text"
+        app:layout_constraintBottom_toTopOf="@+id/actionMode"
+        app:layout_constraintEnd_toEndOf="@+id/actionMode"
+        app:layout_constraintStart_toStartOf="@+id/actionMode" />
+
+    <TextView
+        android:id="@+id/actionMode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/pomodoro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintTop_toTopOf="@+id/pomodoro"
+        tools:text="Nothing" />
 
     <TextView
         android:id="@+id/iconColorTitle"
@@ -131,8 +150,8 @@
         android:id="@+id/iconColor"
         android:layout_width="@dimen/icon_size_large"
         android:layout_height="@dimen/icon_size_large"
-        android:backgroundTint="?attr/colorSecondary"
         android:background="?attr/colorSecondary"
+        android:backgroundTint="?attr/colorSecondary"
         android:padding="@dimen/indent_small"
         android:src="@drawable/ic_icon_color_24"
         app:layout_constraintEnd_toEndOf="@id/iconColorTitle"
@@ -144,8 +163,8 @@
         android:id="@+id/iconFile"
         android:layout_width="@dimen/icon_size_large"
         android:layout_height="@dimen/icon_size_large"
-        android:backgroundTint="?attr/colorSecondary"
         android:background="?attr/colorSecondary"
+        android:backgroundTint="?attr/colorSecondary"
         android:padding="@dimen/indent_small"
         android:src="@drawable/ic_check_24"
         app:layout_constraintBottom_toBottomOf="@+id/iconColor"
@@ -156,8 +175,8 @@
 
     <!-- For group -->
     <CheckBox
-        style="@style/Theme.TimeFocus.CheckBox"
         android:id="@+id/group"
+        style="@style/Theme.TimeFocus.CheckBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/action_group_text"
@@ -196,5 +215,12 @@
         android:visibility="gone"
         app:constraint_referenced_ids="recycler,addGroupMember"
         tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

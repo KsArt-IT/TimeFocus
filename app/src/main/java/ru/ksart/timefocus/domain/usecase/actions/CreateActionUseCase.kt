@@ -7,6 +7,16 @@ class CreateActionUseCase @Inject constructor(
     private val repository: ActionsRepository,
 ) {
 
-    suspend operator fun invoke(params: Long): Long = repository.addAction(params)
+    suspend operator fun invoke(params: Long): Boolean {
+        return try {
+            // проверить не запущена ли активность
+            if (repository.isActiveActionsByActionsNameId(params).not()) {
+                repository.addAction(params)
+                true
+            } else false
+        } catch (e: Exception) {
+            false
+        }
+    }
 
 }

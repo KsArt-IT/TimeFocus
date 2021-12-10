@@ -69,7 +69,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVers")
     // Dagger Hilt
     val hiltVers: String by rootProject.extra
-    implementation("com.google.dagger:hilt-android:${rootProject.extra["hiltVers"]}")
+    implementation("com.google.dagger:hilt-android:$hiltVers")
     kapt("com.google.dagger:hilt-compiler:$hiltVers")
     // RoomDao
     val roomVers: String by rootProject.extra
@@ -88,8 +88,6 @@ dependencies {
     val coilVers = "1.4.0"
     implementation("io.coil-kt:coil:$coilVers")
     implementation("io.coil-kt:coil-svg:$coilVers")
-    // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
     // PreferenceFragmentCompat
     implementation("androidx.preference:preference-ktx:1.1.1")
     // DateTime

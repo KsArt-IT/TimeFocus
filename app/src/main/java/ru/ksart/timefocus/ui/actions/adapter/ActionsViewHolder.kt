@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import org.threeten.bp.Instant
 import ru.ksart.timefocus.R
 import ru.ksart.timefocus.databinding.ItemActionsBinding
 import ru.ksart.timefocus.data.entities.ActionStatus
@@ -21,6 +23,7 @@ import ru.ksart.timefocus.data.db.models.ActionWithInfo
 import ru.ksart.timefocus.ui.extension.TIMER_INTERVAL
 import ru.ksart.timefocus.ui.extension.displayTime
 import ru.ksart.timefocus.ui.extension.loadSvgFromAsset
+import timber.log.Timber
 
 class ActionsViewHolder(
     private val binding: ItemActionsBinding,
@@ -29,17 +32,19 @@ class ActionsViewHolder(
 
     private var item: ActionWithInfo? = null
     private var isClick = false
-    private var coroutineScope: CoroutineScope? = null
+    private var job: Job? = null
+    private var coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     private val attachListener = object : View.OnAttachStateChangeListener {
         override fun onViewAttachedToWindow(p0: View?) {
 //            Timber.tag("tag153").d("ActionsViewHolder: coroutineScope attached")
-            startShowTimer()
+            item?.let { if (it.status == ActionStatus.ACTIVE) startShowTimer() }
         }
 
         override fun onViewDetachedFromWindow(p0: View?) {
 //            Timber.tag("tag153").d("ActionsViewHolder: coroutineScope Detached")
-            coroutineScope?.cancel()
-            coroutineScope = null
+//            coroutineScope?.cancel()
+//            coroutineScope = null
+            job?.cancel()
             binding.root.removeOnAttachStateChangeListener(this)
         }
     }
@@ -67,17 +72,20 @@ class ActionsViewHolder(
 
     private fun startShowTimer() {
 //        Timber.tag("tag153").d("ActionsViewHolder: coroutineScope init")
-        coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-        coroutineScope?.launch {
+//        coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+        job?.cancel()
+        job = coroutineScope.launch {
 //            Timber.tag("tag153").d("ActionsViewHolder: coroutineScope start")
-            while (isActive) {
+            while (isActive && item!!.status == ActionStatus.ACTIVE) {
                 binding.run {
                     item?.let {
+                        it.current = Instant.now().toEpochMilli() - it.startDate.toEpochMilli()
                         timer.text = it.current.displayTime()
                         val timeAll = it.current + (it.times ?: 0)
-                        binding.times.text = timeAll.displayTime()
+                        times.text = timeAll.displayTime()
                     }
                 }
+//            Timber.tag("tag153").d("ActionsViewHolder: coroutineScope times=${binding.times.text}")
                 delay(TIMER_INTERVAL)
             }
         }
@@ -98,7 +106,7 @@ class ActionsViewHolder(
                 PorterDuff.Mode.SRC_IN
             )
             timer.text = item.current.displayTime()
-//            times.text = item.times.displayTime()
+            times.text = (item.times ?: 0).displayTime()
         }
         // Добавляем слушатель, который будет отменять
         // корутину, если вьюха откреплена

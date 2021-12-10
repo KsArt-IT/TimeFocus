@@ -39,7 +39,7 @@ class ActionsFragment : BaseFragment<FragmentActionsBinding>(FragmentActionsBind
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.uiStateAction.collect { state ->
-                        when(state) {
+                        when (state) {
                             is UiState.Success -> actionsAdapter.submitList(state.data)
                             is UiState.Loading -> {}
                         }.exhaustive
@@ -48,16 +48,64 @@ class ActionsFragment : BaseFragment<FragmentActionsBinding>(FragmentActionsBind
                 launch {
                     viewModel.uiState.collect { state ->
                         Timber.tag("tag153").d("ActionsFragment: uiState")
-                        when(state) {
+                        when (state) {
                             is UiState.Success -> actionNamesAdapter.submitList(state.data)
                             is UiState.Loading -> {}
                         }.exhaustive
                     }
                 }
                 launch {
+                    viewModel.pomodoroState.collect { state ->
+//                        Timber.tag("tag153").d("ActionsFragment: uiState")
+                        when (state) {
+                            is UiState.Success -> {
+                                val (pomodoro, pomodoroCount) = state.data
+//                                Timber.tag("tag153")
+//                                    .d("ActionsFragment: Pomodoro=${pomodoro.time} - ${pomodoro.timeDuration}")
+                                binding.run {
+                                    if (pomodoro.isStarted && pomodoro.time == 0L && pomodoro.timeDuration > 0) {
+                                        pomodoroGroup.isEnabled = true
+                                        pomodoroProgress.progress = 0
+                                        pomodoroProgress.max = pomodoro.timeDuration.toInt()
+//                                        Timber.tag("tag153")
+//                                            .d("ActionsFragment: Pomodoro pomodoroProgress.max=${pomodoroProgress.max}")
+                                    }
+                                    if (pomodoro.isStarted.not() && pomodoroGroup.isEnabled) {
+                                        pomodoroGroup.isEnabled = false
+                                    }
+                                    pomodoroProgress.progress = pomodoro.time.toInt()
+                                    pomodoroCounter.text = pomodoroCount.toString()
+                                }
+                            }
+                            is UiState.Loading -> {
+//                                Timber.tag("tag153").d("ActionsFragment: Pomodoro = false")
+                                binding.pomodoroGroup.isEnabled = false
+                            }
+                        }.exhaustive
+                    }
+                }
+                launch {
+                    viewModel.waterState.collect { state ->
+                        when (state) {
+                            is UiState.Success -> {
+//                                Timber.tag("tag153").d("ActionsFragment: Water = ${state.data}")
+                                binding.run {
+                                    waterGroup.isEnabled = true
+                                    waterCounter.text = state.data.toString()
+                                    watterProgress.progress = state.data.toInt()
+                                }
+                            }
+                            is UiState.Loading -> {
+//                                Timber.tag("tag153").d("ActionsFragment: Water = false")
+                                binding.waterGroup.isEnabled = false
+                            }
+                        }
+                    }
+                }
+                launch {
                     viewModel.uiEvent.collect { event ->
-                        Timber.tag("tag153").d("ActionsFragment: uiState")
-                        when(event) {
+//                        Timber.tag("tag153").d("ActionsFragment: uiState")
+                        when (event) {
                             is UiEvent.Toast -> toast(event.stringId)
                             is UiEvent.Error -> toast(event.message)
                             is UiEvent.Success -> {}
@@ -70,7 +118,7 @@ class ActionsFragment : BaseFragment<FragmentActionsBinding>(FragmentActionsBind
     }
 
     override fun initList() {
-        Timber.tag("tag153").d("ActionsFragment: initList")
+//        Timber.tag("tag153").d("ActionsFragment: initList")
         binding.actionsList.run {
             adapter = ActionsAdapter(viewModel::uiAction.invoke())
             layoutManager = LinearLayoutManager(requireContext().applicationContext)
@@ -83,6 +131,14 @@ class ActionsFragment : BaseFragment<FragmentActionsBinding>(FragmentActionsBind
             layoutManager = GridLayoutManager(requireContext().applicationContext, 4)
             setHasFixedSize(true)
             isNestedScrollingEnabled = false
+        }
+    }
+
+    override fun initListener() {
+        binding.waterImage.setOnClickListener {
+//            Timber.tag("tag153").d("ActionsFragment: Water waterImage click")
+            binding.waterGroup.isEnabled = false
+            viewModel.saveWater()
         }
     }
 }

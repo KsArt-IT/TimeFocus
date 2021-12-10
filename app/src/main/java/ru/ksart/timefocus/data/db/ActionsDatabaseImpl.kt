@@ -8,6 +8,7 @@ import ru.ksart.timefocus.data.db.models.ActionNames
 import ru.ksart.timefocus.data.db.models.ActionSuspend
 import ru.ksart.timefocus.data.db.models.Actions
 import ru.ksart.timefocus.data.db.models.PomodoroIntervals
+import ru.ksart.timefocus.data.db.models.Water
 
 @Database(
     entities = [
@@ -16,6 +17,7 @@ import ru.ksart.timefocus.data.db.models.PomodoroIntervals
         Actions::class,
         ActionSuspend::class,
         PomodoroIntervals::class,
+        Water::class,
     ],
     version = ActionsDatabaseImpl.DB_VERSION,
     // room.schemaLocation для генерации схем RoomDao

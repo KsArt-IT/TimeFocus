@@ -85,6 +85,10 @@ class ActionsEditFragment :
             pomodoro.setOnCheckedChangeListener { _, isChecked ->
                 pomodoroLong.isEnabled = isChecked
             }
+            actionMode.setOnClickListener {
+                saveActionName()
+                viewModel.changeMode()
+            }
             group.setOnClickListener { saveActionName() }
             addGroupMember.setOnClickListener {
                 showMembersToAddGroup()
@@ -170,6 +174,9 @@ class ActionsEditFragment :
                 suspendAll.isChecked = action.suspendAll
                 pomodoro.isChecked = action.pomodoro
                 pomodoroLong.isChecked = action.pomodoroLong
+
+                // режим запуска экшина
+                actionMode.setText(action.mode.nameId)
 
                 // группа
                 group.isChecked = action.group

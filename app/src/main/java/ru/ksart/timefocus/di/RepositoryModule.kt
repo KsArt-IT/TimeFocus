@@ -4,20 +4,22 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import ru.ksart.timefocus.data.repositories.ActionNamesRepositoryImpl
-import ru.ksart.timefocus.domain.repositories.ActionNamesEditRepository
 import ru.ksart.timefocus.data.repositories.ActionNamesEditRepositoryImpl
-import ru.ksart.timefocus.domain.repositories.ActionsRepository
+import ru.ksart.timefocus.data.repositories.ActionNamesRepositoryImpl
 import ru.ksart.timefocus.data.repositories.ActionsRepositoryImpl
-import ru.ksart.timefocus.domain.repositories.IconsRepository
 import ru.ksart.timefocus.data.repositories.IconsRepositoryImpl
-import ru.ksart.timefocus.domain.repositories.IntervalsRepository
 import ru.ksart.timefocus.data.repositories.IntervalsRepositoryImpl
-import ru.ksart.timefocus.domain.repositories.OnboardingRepository
 import ru.ksart.timefocus.data.repositories.OnboardingRepositoryImpl
-import ru.ksart.timefocus.domain.repositories.SettingsRepository
 import ru.ksart.timefocus.data.repositories.SettingsRepositoryImpl
+import ru.ksart.timefocus.data.repositories.WaterRepositoryImpl
+import ru.ksart.timefocus.domain.repositories.ActionNamesEditRepository
 import ru.ksart.timefocus.domain.repositories.ActionNamesRepository
+import ru.ksart.timefocus.domain.repositories.ActionsRepository
+import ru.ksart.timefocus.domain.repositories.IconsRepository
+import ru.ksart.timefocus.domain.repositories.IntervalsRepository
+import ru.ksart.timefocus.domain.repositories.OnboardingRepository
+import ru.ksart.timefocus.domain.repositories.SettingsRepository
+import ru.ksart.timefocus.domain.repositories.WaterRepository
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -43,4 +45,7 @@ interface RepositoryModule {
 
     @Binds
     fun provideIntervalsRepository(impl: IntervalsRepositoryImpl): IntervalsRepository
+
+    @Binds
+    fun provideWaterRepository(impl: WaterRepositoryImpl): WaterRepository
 }

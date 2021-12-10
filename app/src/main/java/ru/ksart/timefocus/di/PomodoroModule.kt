@@ -4,15 +4,16 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.ksart.timefocus.domain.repositories.Timers
-import ru.ksart.timefocus.domain.entities.TimersImpl
+import ru.ksart.timefocus.data.repositories.PomodoroImpl
+import ru.ksart.timefocus.domain.repositories.Pomodoro
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface TimerModule {
+interface PomodoroModule {
 
     @Binds
     @Singleton
-    fun provideTimer(impl: TimersImpl): Timers
+    fun providePomodoro(impl: PomodoroImpl): Pomodoro
+
 }

@@ -19,6 +19,8 @@ object ActionNamesContract {
         const val POMODORO_LONG = "pomodoro_long" // Время помидора долгий интервал или короткий интервал, короткий может автоматически продлиться в длинный
         const val POMODORO_SWITCH_ID = "pomodoro_switch_id" // По завершению помидора сменить активность на отдых
 
+        const val MODE = "action_mode" // режим работы
+
         const val COLOR = "color" // Цвет активности
         const val ICON = "icon" // Иконка активности
 

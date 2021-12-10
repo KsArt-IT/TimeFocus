@@ -18,11 +18,15 @@ import ru.ksart.timefocus.domain.usecase.actions.CreateActionUseCase
 import ru.ksart.timefocus.domain.usecase.actions.GetActionNamesGroupByGroupIdUseCase
 import ru.ksart.timefocus.domain.usecase.actions.GetActionNamesWithoutGroupUseCase
 import ru.ksart.timefocus.domain.usecase.actions.GetActionsWithInfoUseCase
-import ru.ksart.timefocus.domain.usecase.actions.PauseTimerUseCase
-import ru.ksart.timefocus.domain.usecase.actions.StartTimerUseCase
 import ru.ksart.timefocus.domain.usecase.actions.StopActionUseCase
-import ru.ksart.timefocus.domain.usecase.actions.StopTimerUseCase
 import ru.ksart.timefocus.domain.usecase.actions.UpdateActionStatusUseCase
+import ru.ksart.timefocus.domain.usecase.pomodoro.CounterPomodoroUseCase
+import ru.ksart.timefocus.domain.usecase.pomodoro.SavePomodoroUseCase
+import ru.ksart.timefocus.domain.usecase.pomodoro.StartPomodoroUseCase
+import ru.ksart.timefocus.domain.usecase.pomodoro.StopPomodoroUseCase
+import ru.ksart.timefocus.domain.usecase.pomodoro.UsePomodoroUseCase
+import ru.ksart.timefocus.domain.usecase.water.SaveWaterUseCase
+import ru.ksart.timefocus.domain.usecase.water.WaterVolumeUseCase
 
 class ActionsViewModelTest {
 
@@ -39,19 +43,31 @@ class ActionsViewModelTest {
     lateinit var stopAction: StopActionUseCase
 
     @MockK
-    lateinit var startTimer: StartTimerUseCase
-
-    @MockK
-    lateinit var pauseTimer: PauseTimerUseCase
-
-    @MockK
-    lateinit var stopTimer: StopTimerUseCase
-
-    @MockK
     lateinit var getActionsNames: GetActionNamesWithoutGroupUseCase
 
     @MockK
     lateinit var getActionsNamesByGroupId: GetActionNamesGroupByGroupIdUseCase
+
+    @MockK
+    lateinit var startPomodoro: StartPomodoroUseCase
+
+    @MockK
+    lateinit var stopPomodoro: StopPomodoroUseCase
+
+    @MockK
+    lateinit var usePomodoro: UsePomodoroUseCase
+
+    @MockK
+    lateinit var counterPomodoro: CounterPomodoroUseCase
+
+    @MockK
+    lateinit var savePomodoro: SavePomodoroUseCase
+
+    @MockK
+    lateinit var waterVolume: WaterVolumeUseCase
+
+    @MockK
+    lateinit var saveWaterUseCase: SaveWaterUseCase
 
     @SpyK
     @InjectMockKs

@@ -7,6 +7,7 @@ Time tracker with pomodoro technology connection and event notification.
 
 - [Time management](https://en.wikipedia.org/wiki/Time_management)
 - [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique)
+- [Water meter]
 
 ## Help
 
@@ -45,4 +46,4 @@ Time tracker with pomodoro technology connection and event notification.
 - [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) for
   Dependency Injection
 - [Room](https://developer.android.com/training/data-storage/room) for managing a local SQLite  database
-- [Glide](https://github.com/bumptech/glide) for image loading
+- [Coil](https://coil-kt.github.io/coil/) for image loading

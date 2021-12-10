@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Ignore
 import kotlinx.coroutines.flow.Flow
 import org.threeten.bp.Instant
+import ru.ksart.timefocus.data.entities.ActionMode
 import ru.ksart.timefocus.data.entities.ActionStatus
 
 data class ActionWithInfo(
@@ -33,18 +34,19 @@ data class ActionWithInfo(
     @ColumnInfo(name = ActionNamesContract.Columns.POMODORO_SWITCH_ID)
     val pomodoroSwitchId: Long? = null,
 
+    @ColumnInfo(name = ActionNamesContract.Columns.MODE)
+    val mode: ActionMode = ActionMode.NOTHING,
+
     @ColumnInfo(name = ActionNamesContract.Columns.COLOR)
     val color: Int = -0x1000000,//0xFF000000 Black
     @ColumnInfo(name = ActionNamesContract.Columns.ICON)
     val icon: String,
 
     @ColumnInfo(name = ActionsContract.Columns.TIMES_ACTION)
-//    @Ignore
     val times: Long? = 0,
+
     @Ignore
     var current: Long = 0,
-    @Ignore
-    var statusFlow: Flow<ActionStatus>? = null,
 ) {
     constructor(
         id: Long = 0,
@@ -62,6 +64,8 @@ data class ActionWithInfo(
         pomodoroLong: Boolean = false,
         pomodoroSwitchId: Long? = null,
 
+        mode: ActionMode = ActionMode.NOTHING,
+
         color: Int = -0x1000000,//0xFF000000 Black
         icon: String,
         times: Long? = 0,
@@ -77,50 +81,13 @@ data class ActionWithInfo(
         pomodoro = pomodoro,
         pomodoroLong = pomodoroLong,
         pomodoroSwitchId = pomodoroSwitchId,
+
+        mode = mode,
+
         color = color,
         icon = icon,
         times = times,
 
         current = 0,
-        statusFlow = null,
     )
 }
-// B.name, B.color, B.icon, B.pomodoro, B.pomodoro_long, B.suspend, B.suspend_all
-/*
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = ActionNamesContract.Columns.ID)
-    val id: Long = 0,
-
-    @ColumnInfo(name = ActionNamesContract.Columns.NAME)
-    val name: String,
-    @ColumnInfo(name = ActionNamesContract.Columns.DESCRIPTION)
-    val description: String? = null,
-
-    @ColumnInfo(name = ActionNamesContract.Columns.GROUP)
-    val group: Boolean = false,
-    @ColumnInfo(name = ActionNamesContract.Columns.GROUP_ID)
-    val groupId: Long? = null,
-
-    @ColumnInfo(name = ActionNamesContract.Columns.SUSPEND)
-    val suspend: Boolean = false,
-    @ColumnInfo(name = ActionNamesContract.Columns.SUSPEND_ALL)
-    val suspendAll: Boolean = false,
-
-    @ColumnInfo(name = ActionNamesContract.Columns.POMODORO)
-    val pomodoro: Boolean = false,
-    @ColumnInfo(name = ActionNamesContract.Columns.POMODORO_LONG)
-    val pomodoroLong: Boolean = false,
-    @ColumnInfo(name = ActionNamesContract.Columns.POMODORO_SWITCH_ID)
-    val pomodoroSwitchId: Long? = null,
-
-    @ColumnInfo(name = ActionNamesContract.Columns.COLOR)
-    val color: Int = -0x1000000,//0xFF000000 Black
-    @ColumnInfo(name = ActionNamesContract.Columns.ICON)
-    val icon: String,
-
-    @ColumnInfo(name = ActionNamesContract.Columns.NUMBER)
-    val number: Int = 0,
-    @ColumnInfo(name = ActionNamesContract.Columns.ARCHIVE)
-    val archive: Boolean = false,
-
- */

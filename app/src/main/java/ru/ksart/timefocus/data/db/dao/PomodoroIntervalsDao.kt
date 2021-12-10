@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import ru.ksart.timefocus.data.db.models.ActionIntervals
-import ru.ksart.timefocus.data.db.models.ActionIntervalsContract
+import kotlinx.coroutines.flow.Flow
+import org.threeten.bp.Instant
 import ru.ksart.timefocus.data.db.models.PomodoroIntervals
 import ru.ksart.timefocus.data.db.models.PomodoroIntervalsContract
 
@@ -22,9 +22,14 @@ interface PomodoroIntervalsDao {
     @Delete
     suspend fun delete(item: PomodoroIntervals)
 
-    @Query("SELECT * FROM ${PomodoroIntervalsContract.TABLE_NAME} WHERE ${PomodoroIntervalsContract.Columns.ACTIONS_ID} = :actionId ORDER BY ${PomodoroIntervalsContract.Columns.START_DATE} ASC")
-    suspend fun getPomodoroIntervalsByAction(actionId: Long): List<ActionIntervals>
+    @Query("SELECT COUNT(A.id) FROM ${PomodoroIntervalsContract.TABLE_NAME} A WHERE (A.start_date >= :startDate AND A.start_date < :stopDate) OR (A.stop_date <= :stopDate AND A.stop_date > :startDate)")
+    fun getCountPomodoroByDate(
+        startDate: Instant,
+        stopDate: Instant
+    ): Flow<Int>
 
+/*
     @Query("SELECT * FROM ${PomodoroIntervalsContract.TABLE_NAME} WHERE ${PomodoroIntervalsContract.Columns.START_DATE} = :startDate AND ${PomodoroIntervalsContract.Columns.STOP_DATE} = :stopDate ORDER BY ${ActionIntervalsContract.Columns.START_DATE} ASC")
     suspend fun getPomodoroIntervalsByDate(startDate: Long, stopDate: Long): List<PomodoroIntervals>
+*/
 }

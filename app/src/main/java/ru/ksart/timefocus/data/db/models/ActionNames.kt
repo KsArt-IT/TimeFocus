@@ -7,6 +7,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import ru.ksart.timefocus.data.entities.ActionMode
 
 @Parcelize
 @Entity(
@@ -52,6 +53,9 @@ data class ActionNames(
     val pomodoroLong: Boolean = false,
     @ColumnInfo(name = ActionNamesContract.Columns.POMODORO_SWITCH_ID)
     val pomodoroSwitchId: Long? = null,
+
+    @ColumnInfo(name = ActionNamesContract.Columns.MODE)
+    val mode: ActionMode = ActionMode.NOTHING,
 
     @ColumnInfo(name = ActionNamesContract.Columns.COLOR)
     val color: Int = -0x1000000,//0xFF000000 Black

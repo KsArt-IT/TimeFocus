@@ -24,6 +24,13 @@
         <item name="materialButtonStyle">@style/Theme.TimeFocus.Button</item>
     </style>
 
+    <style name="Theme.TimeFocus.LinearProgressIndicator" parent="Widget.MaterialComponents.LinearProgressIndicator">
+        // толщина
+        <item name="trackThickness">20dp</item>
+        <item name="trackCornerRadius">8dp</item>
+
+    </style>
+
     <style name="Theme.TimeFocus.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textColorHint">?attr/colorOnPrimary</item>

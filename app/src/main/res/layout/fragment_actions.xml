@@ -8,6 +8,13 @@
     android:orientation="vertical"
     android:padding="@dimen/indent_small">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/actionsList"
         android:layout_width="0dp"
@@ -23,20 +30,108 @@
         android:id="@+id/actionNamesList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/indent_small"
+        android:layout_marginVertical="@dimen/indent_small"
         android:clipToPadding="false"
         android:paddingBottom="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineActions"
         tools:itemCount="5"
         tools:listitem="@layout/item_actions_name" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineActions"
+    <View
+        android:id="@+id/divider"
+        style="@style/Divider"
+        android:layout_marginBottom="@dimen/indent_small"
+        app:layout_constraintBottom_toTopOf="@+id/pomodoroImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/pomodoroImage"
+        android:layout_width="@dimen/pomodoro_image_size"
+        android:layout_height="@dimen/pomodoro_image_size"
+        android:src="@drawable/pomodoro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/pomodoroCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        android:layout_marginStart="@dimen/indent_small"
+        android:text="@string/zero_text"
+        android:textColor="@color/red_300_dark"
+        app:layout_constraintBottom_toBottomOf="@id/watterProgress"
+        app:layout_constraintStart_toEndOf="@+id/pomodoroImage"
+        app:layout_constraintTop_toTopOf="@+id/watterProgress" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pomodoroProgress"
+        style="@style/Theme.TimeFocus.LinearProgressIndicator"
+        android:layout_width="0dp"
+        android:progress="0"
+        tools:progress="50"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent_small"
+        android:visibility="visible"
+        app:indicatorColor="@color/red_300_dark"
+        app:indicatorDirectionLinear="startToEnd"
+        app:layout_constraintBottom_toTopOf="@id/watterProgress"
+        app:layout_constraintEnd_toStartOf="@+id/waterCounter"
+        app:layout_constraintStart_toEndOf="@+id/pomodoroImage"
+        app:layout_constraintTop_toTopOf="@+id/pomodoroImage"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:trackColor="@color/red_300_light" />
+
+    <ImageView
+        android:id="@+id/waterImage"
+        android:layout_width="@dimen/pomodoro_image_size"
+        android:layout_height="@dimen/pomodoro_image_size"
+        android:src="@drawable/glass_of_water"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/waterCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/indent_small"
+        android:text="@string/zero_text"
+        android:textColor="@color/blue_300_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/pomodoroProgress"
+        app:layout_constraintEnd_toStartOf="@+id/waterImage"
+        app:layout_constraintTop_toTopOf="@+id/pomodoroProgress" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/watterProgress"
+        style="@style/Theme.TimeFocus.LinearProgressIndicator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent_small"
+        android:max="2000"
+        android:progress="0"
+        tools:progress="1000"
+        android:visibility="visible"
+        app:indicatorColor="@color/blue_300_dark"
+        app:indicatorDirectionLinear="endToStart"
+        app:layout_constraintBottom_toBottomOf="@id/waterImage"
+        app:layout_constraintEnd_toStartOf="@+id/waterImage"
+        app:layout_constraintStart_toEndOf="@+id/pomodoroCounter"
+        app:layout_constraintTop_toBottomOf="@+id/pomodoroProgress"
+        app:trackColor="@color/blue_300_light" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/waterGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="waterImage,waterCounter,watterProgress" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/pomodoroGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="pomodoroImage,pomodoroCounter,pomodoroProgress" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

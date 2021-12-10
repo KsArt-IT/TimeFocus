@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.ksart.timefocus.R
 import ru.ksart.timefocus.data.db.models.ActionNames
+import ru.ksart.timefocus.data.entities.ActionMode
 import ru.ksart.timefocus.data.entities.UiEvent
 import ru.ksart.timefocus.data.entities.UiState
 import ru.ksart.timefocus.domain.entities.Results
@@ -239,4 +240,16 @@ class ActionsEditViewModel @Inject constructor(
         _groupState.value = UiState.Success(groupMembers.toList())
     }
 
+    fun changeMode() {
+        viewModelScope.launch {
+            val mode = when (actionNames.mode) {
+                ActionMode.NOTHING -> ActionMode.STRICT
+                ActionMode.STRICT -> ActionMode.PAUSE
+                ActionMode.PAUSE -> ActionMode.NOTHING
+            }
+            actionNames = actionNames.copy(mode = mode)
+            Timber.tag("tag153").d("ActionsEditViewModel: mode=$mode")
+            updateUiState()
+        }
+    }
 }

@@ -40,5 +40,11 @@
     <string name="more_about_button_text">About</string>
     <string name="action_add_title">Adding action</string>
     <string name="action_back_name">Back</string>
+    <string name="zero_text">0</string>
+    <string name="action_mode_nothing">Nothing</string>
+    <string name="action_mode_strict">Strict</string>
+    <string name="action_mode_pause">Pause</string>
+    <string name="app_about">TimeFocus vers. 1.0a</string>
+    <string name="action_start_mode_text">Action start mode</string>
 
 </resources>

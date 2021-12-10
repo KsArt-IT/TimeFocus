@@ -31,7 +31,12 @@ class ActionsRepositoryImpl @Inject constructor(
     override fun getActionsWithInfo(): Flow<List<ActionWithInfo>> =
         db.actionsDao().actionsWithInfo().flowOn(dispatcher)
 
-    override suspend fun addAction(actionNamesId: Long): Long = withContext(dispatcher) {
+    override suspend fun isActiveActionsByActionsNameId(actionNamesId: Long): Boolean =
+        withContext(dispatcher) {
+            db.actionsDao().select(actionNamesId) != null
+        }
+
+    override suspend fun addAction(actionNamesId: Long): Boolean = withContext(dispatcher) {
         Timber.tag("tag153").d("ActionsRepositoryImpl: addAction")
         db.actionsDao().insert(
             Actions(
@@ -41,6 +46,7 @@ class ActionsRepositoryImpl @Inject constructor(
                 comment = null,
             )
         )
+        true
     }
 
     private suspend fun insertIntervals(action: ActionWithInfo) {
@@ -55,18 +61,6 @@ class ActionsRepositoryImpl @Inject constructor(
                     stopDate = stopDate,
                 )
             )
-            // запишем помидор если нужно
-            if (action.pomodoro) {
-                // TODO необходимо сделать проверку на полный помидор
-                db.pomodoroIntervalsDao().insert(
-                    PomodoroIntervals(
-                        actionsId = action.id,
-                        actionNamesId = action.actionNamesId,
-                        startDate = action.startDate,
-                        stopDate = stopDate,
-                    )
-                )
-            }
         }
     }
 
