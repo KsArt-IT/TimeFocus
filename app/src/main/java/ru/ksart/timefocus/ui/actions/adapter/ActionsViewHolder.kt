@@ -10,20 +10,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.threeten.bp.Instant
 import ru.ksart.timefocus.R
-import ru.ksart.timefocus.databinding.ItemActionsBinding
+import ru.ksart.timefocus.data.db.models.ActionWithInfo
 import ru.ksart.timefocus.data.entities.ActionStatus
 import ru.ksart.timefocus.data.entities.UiAction
-import ru.ksart.timefocus.data.db.models.ActionWithInfo
+import ru.ksart.timefocus.databinding.ItemActionsBinding
 import ru.ksart.timefocus.ui.extension.TIMER_INTERVAL
 import ru.ksart.timefocus.ui.extension.displayTime
 import ru.ksart.timefocus.ui.extension.loadSvgFromAsset
-import timber.log.Timber
 
 class ActionsViewHolder(
     private val binding: ItemActionsBinding,
@@ -35,12 +33,12 @@ class ActionsViewHolder(
     private var job: Job? = null
     private var coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     private val attachListener = object : View.OnAttachStateChangeListener {
-        override fun onViewAttachedToWindow(p0: View?) {
+        override fun onViewAttachedToWindow(v: View) {
 //            Timber.tag("tag153").d("ActionsViewHolder: coroutineScope attached")
             item?.let { if (it.status == ActionStatus.ACTIVE) startShowTimer() }
         }
 
-        override fun onViewDetachedFromWindow(p0: View?) {
+        override fun onViewDetachedFromWindow(v: View) {
 //            Timber.tag("tag153").d("ActionsViewHolder: coroutineScope Detached")
 //            coroutineScope?.cancel()
 //            coroutineScope = null

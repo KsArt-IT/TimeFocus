@@ -35,8 +35,8 @@ fun ImageView.loadSvgFromAsset(name: String) {
 
 fun ImageView.loadSvg(context: Context, file: String) {
     val imageLoader = ImageLoader.Builder(context)
-        .componentRegistry {
-            add(SvgDecoder(context))
+        .components {
+            add(SvgDecoder.Factory())
         }
         .build()
 
@@ -51,13 +51,15 @@ fun ImageView.loadSvg(context: Context, file: String) {
 
 inline fun <T> View.doAsync(
     crossinline backgroundTask: (scope: CoroutineScope) -> T,
-    crossinline result: (T?) -> Unit) {
+    crossinline result: (T?) -> Unit
+) {
     val job = CoroutineScope(Dispatchers.Main)
     // Добавляем слушатель, который будет отменять
     // корутину, если вьюха откреплена
     val attachListener = object : View.OnAttachStateChangeListener {
-        override fun onViewAttachedToWindow(p0: View?) {}
-        override fun onViewDetachedFromWindow(p0: View?) {
+        override fun onViewAttachedToWindow(v: View) {}
+
+        override fun onViewDetachedFromWindow(v: View) {
             job.cancel()
             removeOnAttachStateChangeListener(this)
         }

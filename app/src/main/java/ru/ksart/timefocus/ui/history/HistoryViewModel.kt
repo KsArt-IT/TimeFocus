@@ -3,6 +3,7 @@ package ru.ksart.timefocus.ui.history
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -27,6 +28,7 @@ import ru.ksart.timefocus.ui.extension.toDateFormat
 import timber.log.Timber
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
     private val getActionHistory: GetActionHistoryUseCase,
@@ -64,6 +66,8 @@ class HistoryViewModel @Inject constructor(
             viewModelScope.launch {
                 when (uiAction) {
                     is UiAction.Click -> _uiEvent.send(UiEvent.Success(uiAction.data))
+                    is UiAction.Select -> TODO()
+                    is UiAction.Stop -> TODO()
                 }
             }
         }

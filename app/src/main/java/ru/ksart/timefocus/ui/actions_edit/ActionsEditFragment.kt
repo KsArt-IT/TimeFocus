@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.ksart.timefocus.R
 import ru.ksart.timefocus.data.db.models.ActionNames
@@ -118,6 +117,7 @@ class ActionsEditFragment :
                                 updateUi(state.data)
                                 enableView(true)
                             }
+
                             is UiState.Loading -> enableView(false)
                         }.exhaustive
                     }
@@ -129,6 +129,7 @@ class ActionsEditFragment :
                             is UiState.Success -> {
                                 listAdapter.submitList(state.data)
                             }
+
                             is UiState.Loading -> {}
                         }.exhaustive
                     }
@@ -149,7 +150,7 @@ class ActionsEditFragment :
                 ).observe(viewLifecycleOwner) { file ->
                     viewModel.setIconFile(file)
                 }
-                getLiveData<ActionNames>(
+                getLiveData<ActionNames?>(
                     KEY_ADD_MEMBERS,
                     null
                 ).observe(viewLifecycleOwner) { action ->
