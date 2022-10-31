@@ -8,14 +8,14 @@ plugins {
 }
 
 android {
-    compileSdk = rootProject.extra["maxSdkVers"] as Int
+    compileSdk = rootProject.extra["maxSdkVersion"] as Int
 
     defaultConfig {
         applicationId = "ru.ksart.timefocus"
-        minSdk = rootProject.extra["minSdkVers"] as Int
-        targetSdk = rootProject.extra["maxSdkVers"] as Int
-        versionCode = rootProject.extra["codeVers"] as Int
-        versionName = rootProject.extra["nameVers"] as String
+        minSdk = rootProject.extra["minSdkVersion"] as Int
+        targetSdk = rootProject.extra["maxSdkVersion"] as Int
+        versionCode = rootProject.extra["codeVersion"] as Int
+        versionName = rootProject.extra["nameVersion"] as String
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,56 +42,58 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.0")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.20")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("com.google.android.material:material:1.7.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
+    // SplashScreen on devices prior Android 12
+    implementation("androidx.core:core-splashscreen:1.0.0")
     // Fragment
-    val fragmentVers: String by rootProject.extra
-    implementation("androidx.fragment:fragment-ktx:$fragmentVers")
-    implementation("androidx.activity:activity-ktx:1.4.0")
+    val fragmentVersion: String by rootProject.extra
+    implementation("androidx.fragment:fragment-ktx:$fragmentVersion")
+    implementation("androidx.activity:activity-ktx:1.6.1")
     // Lifecycle KTX
-    val lifecycleVers: String by rootProject.extra
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVers")
+    val lifecycleVersion: String by rootProject.extra
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVers")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     // Saved State module for ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVers")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
     // Navigation
-    val navigationVers: String by rootProject.extra
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVers")
-    implementation("androidx.navigation:navigation-ui-ktx:$navigationVers")
+    val navigationVersion: String by rootProject.extra
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
     // Coroutines and Flow
-    val coroutinesVers: String by rootProject.extra
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVers")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVers")
+    val coroutinesVersion: String by rootProject.extra
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
     // Dagger Hilt
-    val hiltVers: String by rootProject.extra
-    implementation("com.google.dagger:hilt-android:$hiltVers")
-    kapt("com.google.dagger:hilt-compiler:$hiltVers")
+    val hiltVersion: String by rootProject.extra
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
     // RoomDao
-    val roomVers: String by rootProject.extra
-    implementation("androidx.room:room-runtime:$roomVers")
-    implementation("androidx.room:room-ktx:$roomVers")
-    kapt("androidx.room:room-compiler:$roomVers")
+    val roomVersion: String by rootProject.extra
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     // Delegate Adapter for RecyclerView
-    implementation("com.hannesdorfmann:adapterdelegates4:4.3.1")
+    implementation("com.hannesdorfmann:adapterdelegates4:4.3.2")
     // Viewpager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     // библиотека для отображения индикатора для viewpager2
-    implementation("com.tbuonomo:dotsindicator:4.2")
+    implementation("com.tbuonomo:dotsindicator:4.3")
     // Coil
-    val coilVers = "1.4.0"
-    implementation("io.coil-kt:coil:$coilVers")
-    implementation("io.coil-kt:coil-svg:$coilVers")
+    val coilVersion = "2.2.2"
+    implementation("io.coil-kt:coil:$coilVersion")
+    implementation("io.coil-kt:coil-svg:$coilVersion")
     // PreferenceFragmentCompat
-    implementation("androidx.preference:preference-ktx:1.1.1")
+    implementation("androidx.preference:preference-ktx:1.2.0")
     // DateTime
-    implementation("com.jakewharton.threetenabp:threetenabp:1.3.1")
+    implementation("com.jakewharton.threetenabp:threetenabp:1.4.2")
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 
@@ -99,14 +101,14 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0-RC")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
 //    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
     // Mockito framework
 //    testImplementation("org.mockito:mockito-inline:3.10.0")
 //    testImplementation("org.mockito:mockito-core:3.10.0")
     // mockk
-    val mockkVers = "1.12.1"
-    testImplementation("io.mockk:mockk:$mockkVers")
-    testImplementation("io.mockk:mockk-agent-jvm:$mockkVers")
-    testImplementation("app.cash.turbine:turbine:0.7.0")
+    val mockkVersion = "1.13.2"
+    testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation("io.mockk:mockk-agent-jvm:$mockkVersion")
+    testImplementation("app.cash.turbine:turbine:0.12.0")
 }

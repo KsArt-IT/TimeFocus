@@ -1,28 +1,31 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    val maxSdkVers by extra(31)
-    val minSdkVers by extra(21)
-    val codeVers by extra(1)
-    val nameVers by extra("1.0")
+    val maxSdkVersion by extra(33)
+    val minSdkVersion by extra(21)
+    val codeVersion by extra(1)
+    val nameVersion by extra("1.0")
 
-    val coroutinesVers by extra("1.5.2")
-    val lifecycleVers by extra("2.4.0")
-    val fragmentVers by extra("1.3.6")
-    val navigationVers by extra("2.3.5")
-    val hiltVers by extra("2.40.2")
-    val roomVers by extra("2.3.0")
+    val coroutinesVersion by extra("1.6.4")
+    val lifecycleVersion by extra("2.5.1")
+    val fragmentVersion by extra("1.5.4")
+    val navigationVersion by extra("2.5.3")
+    val hiltVersion by extra("2.44")
+    val roomVersion by extra("2.4.3")
+    val gradlePluginVersion by extra("7.3.1")
 
     dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVers")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVers")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion")
+        classpath("com.android.tools.build:gradle:")
+        classpath("com.android.tools.build:gradle:7.3.1")
     }
 }
 
 plugins {
-    id("com.android.application").version("7.0.3") apply false
-    id("com.android.library").version("7.0.3") apply false
-    id("org.jetbrains.kotlin.android").version("1.6.0") apply false
-    id("io.gitlab.arturbosch.detekt").version("1.19.0-RC1")
+    id("com.android.application").version("7.3.1") apply false
+    id("com.android.library").version("7.3.1") apply false
+    id("org.jetbrains.kotlin.android").version("1.7.20") apply false
+    id("io.gitlab.arturbosch.detekt").version("1.22.0-RC2")
 }
 
 tasks.register("clean",Delete::class){
