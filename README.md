@@ -1,4 +1,4 @@
-# TimeTracker + Pomodoro
+# TimeTracker + Pomodoro + Drinking water meter
 
 Time tracker with pomodoro technology connection and event notification.
 <p>
@@ -7,7 +7,7 @@ Time tracker with pomodoro technology connection and event notification.
 
 - [Time management](https://en.wikipedia.org/wiki/Time_management)
 - [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique)
-- [Water meter]
+- [Drinking water meter](https://en.wikipedia.org/wiki/Drinking_water)
 
 ## Help
 
@@ -26,9 +26,9 @@ Time tracker with pomodoro technology connection and event notification.
 
 ## Architecture
 
-- [MVVM]
+- [MVVM](https://ru.wikipedia.org/wiki/Model-View-ViewModel)
 - [Clean-Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [Use Case]
+- [Use Case](https://en.wikipedia.org/wiki/Use_case)
 <p>
 <img src="./img/CleanArchitecture.png" width="100%" height="100%"/>
 </p>
@@ -43,7 +43,6 @@ Time tracker with pomodoro technology connection and event notification.
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 - [Navigation](https://developer.android.com/guide/navigation)
 - [View Binding](https://developer.android.com/topic/libraries/view-binding)
-- [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) for
-  Dependency Injection
+- [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) for Dependency Injection
 - [Room](https://developer.android.com/training/data-storage/room) for managing a local SQLite  database
 - [Coil](https://coil-kt.github.io/coil/) for image loading

@@ -12,7 +12,7 @@ typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 abstract class BaseFragment<T : ViewBinding>(private val inflate: Inflate<T>) : Fragment() {
 
     private var _binding: T? = null
-    protected val binding get() = checkNotNull(_binding)
+    protected val binding get() = checkNotNull(_binding) { "binding = null" }
 
     override fun onCreateView(
         inflater: LayoutInflater,
